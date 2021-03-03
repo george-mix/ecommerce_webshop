@@ -1,11 +1,15 @@
-const loggedReducer = (state = false, action) => {
-    switch (action.type) {
-        case 'SIGN':
-            return !state;
+import { createSlice } from '@reduxjs/toolkit';
 
-        default:
-            return state;
+const testSlice = createSlice({
+    name: 'test',
+    initialState: {
+        value: false
+    },
+    reducers: {
+        signIn: state => {
+            state.value = true
+        }
     }
-};
+});
 
-export default loggedReducer;
+export default testSlice.reducer;

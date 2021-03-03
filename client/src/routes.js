@@ -1,14 +1,29 @@
-import { ADMIN_ROUTE, BASKET_ROUTE, SHOP_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, PRODUCT_ROUTE } from "./utils/consts";
-import Admin from './pages/Admin';
+import { ADMIN_ROUTE, ADMIN_PANEL_ROUTE, ADMIN_SINGLE_PRODUCT_ROUTE, BASKET_ROUTE, SHOP_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, PRODUCT_ROUTE, ADMIN_EDIT_POST_ROUTE } from "./utils/consts";
+import Admin from './admin/Admin';
 import Auth from './pages/Auth';
 import Basket from './pages/Basket';
 import ProductDetails from './pages/ProductDetails';
 import Shop from './pages/Shop';
+import AdminPanel from "./admin/AdminPanel";
+import SingleProductPage from "./admin/SingleProductPage";
+import EditPostForm from "./admin/components/EditPostForm";
 
-export const adminRoute = [
+export const adminRoutes = [
     {
         path: ADMIN_ROUTE,
         Component: Admin
+    },
+    {
+        path: ADMIN_PANEL_ROUTE,
+        Component: AdminPanel
+    },
+    {
+        path: ADMIN_SINGLE_PRODUCT_ROUTE + '/:postId',
+        Component: SingleProductPage
+    },
+    {
+        path: ADMIN_EDIT_POST_ROUTE + '/:postId',
+        Component: EditPostForm
     },
 ];
 

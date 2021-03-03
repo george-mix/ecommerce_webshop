@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { authRoutes, publicRoutes } from '../routes';
+import { authRoutes, publicRoutes, adminRoutes } from '../routes';
 import { SHOP_ROUTE } from '../utils/consts';
 
 
@@ -10,6 +10,9 @@ const AppRouter = () => {
 
     return (
         <Switch>
+            {adminRoutes.map(({ path, Component }) =>
+                <Route key={path} path={path} component={Component} exact />
+            )}
             {isAuth && authRoutes.map(({ path, Component }) =>
                 <Route key={path} path={path} component={Component} exact />
             )}
