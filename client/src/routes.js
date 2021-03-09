@@ -1,4 +1,4 @@
-import { ADMIN_ROUTE, ADMIN_PANEL_ROUTE, ADMIN_SINGLE_PRODUCT_ROUTE, BASKET_ROUTE, SHOP_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, PRODUCT_ROUTE, ADMIN_EDIT_POST_ROUTE } from "./utils/consts";
+import { ADMIN_ROUTE, ADMIN_PANEL_ROUTE, ADMIN_SINGLE_PRODUCT_ROUTE, BASKET_ROUTE, SHOP_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, PRODUCT_ROUTE, ADMIN_EDIT_PRODUCT_ROUTE } from "./utils/consts";
 import Admin from './admin/Admin';
 import Auth from './pages/Auth';
 import Basket from './pages/Basket';
@@ -6,7 +6,7 @@ import ProductDetails from './pages/ProductDetails';
 import Shop from './pages/Shop';
 import AdminPanel from "./admin/AdminPanel";
 import SingleProductPage from "./admin/SingleProductPage";
-import EditPostForm from "./admin/components/EditPostForm";
+import EditProductForm from "./admin/components/EditProductForm";
 
 export const adminRoutes = [
     {
@@ -22,8 +22,8 @@ export const adminRoutes = [
         Component: SingleProductPage
     },
     {
-        path: ADMIN_EDIT_POST_ROUTE + '/:postId',
-        Component: EditPostForm
+        path: ADMIN_EDIT_PRODUCT_ROUTE + '/:postId',
+        Component: EditProductForm
     },
 ];
 

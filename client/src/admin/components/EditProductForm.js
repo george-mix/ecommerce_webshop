@@ -2,14 +2,13 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import { postUpdated } from '../../store/reducers/postsSlice';
+import { postUpdated, selectPostById } from '../../store/reducers/postsSlice';
 import { ADMIN_SINGLE_PRODUCT_ROUTE } from '../../utils/consts';
 
 const EditPostForm = ({ match }) => {
     const { postId } = match.params;
 
-    const post = useSelector(state =>
-        state.posts.find(post => post.id === postId));
+    const post = useSelector(state => selectPostById(state, postId));
 
     const [title, setTitle] = useState(post.title);
     const [content, setContent] = useState(post.content);
@@ -20,8 +19,7 @@ const EditPostForm = ({ match }) => {
     const onTitleChanged = (e) => setTitle(e.target.value);
     const onContentChanged = (e) => setContent(e.target.value);
 
-    const onSavePostClicked = (e) => {
-        e.preventDefault();
+    const onSavePostClicked = () => {
         if (title && content) {
             dispatch(postUpdated({ id: postId, title, content }))
             history.push(`${ADMIN_SINGLE_PRODUCT_ROUTE}/${postId}`)
@@ -45,10 +43,10 @@ const EditPostForm = ({ match }) => {
                     value={content}
                     onChange={onContentChanged}
                 />
+                <button type="submit" >
+                    Save Post
+                </button>
             </form>
-            <button type="submit" >
-                Save Post
-            </button>
         </section>
     )
 };
