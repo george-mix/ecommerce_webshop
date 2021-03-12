@@ -75,13 +75,10 @@ class ProductController {
     async updateOne(req, res) {
         try {
             const { id } = req.params;
-            if (!id) {
-                res.status(400).json({ message: 'ID not specified' })
-            };
-            const updatedProduct = await Product.update(req.body, { where: { id: id } })
+            const updatedProduct = await Product.update(req.body, { where: { id: id } });
             return res.json(updatedProduct);
-        } catch (e) {
 
+        } catch (e) {
         }
     }
 
