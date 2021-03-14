@@ -1,28 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import { fetchProducts } from '../../http/productAPI';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchAllProducts } from '../../store/reducers/productsSlice.js';
 
 const ListOfAllProducts = () => {
-    const [products, setProducts] = useState([]);
+    const products = useSelector((state) => state.products.products);
+    const loading = useSelector((state) => state.products.loading);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        const fetchAPI = async () => {
-            try {
-                const data = await fetchProducts(null, null, 1, 2);
-                setProducts(data.rows);
-            } catch (err) { }
-        }
-        fetchAPI()
+        if (!loading)
+            dispatch(fetchAllProducts());
     }, [])
 
-    const list = products.map(product => {
-        return <React.Fragment key={product.id}><h1>{product.name}</h1></React.Fragment>
-    })
+    console.log(products);
+
+
+
 
     return (
-        <div>
-            {list}
-        </div>
+        <section>
+            <h2>Posts</h2>
+        </section>
     )
-}
+};
 
 export default ListOfAllProducts;
