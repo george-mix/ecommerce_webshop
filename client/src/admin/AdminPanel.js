@@ -1,5 +1,6 @@
 import React from 'react';
 import Brands from './components/Brands';
+import Categories from './components/Categories';
 
 const AdminPanel = () => {
 
@@ -7,6 +8,7 @@ const AdminPanel = () => {
         <div>
             <h2>Admin Panel</h2>
             <Brands />
+            <Categories />
         </div>
     )
 };

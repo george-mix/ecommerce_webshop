@@ -1,32 +1,25 @@
-// import React, { useState, useEffect } from 'react';
-// import { fetchCategories } from '../../http/productAPI';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchCategories, selectAllCategories } from '../../store/reducers/categoriesSlice';
 
-// const Categories = () => {
-//     const [categoryList, setCategoryList] = useState([]);
+const Categories = () => {
+    const categories = useSelector(selectAllCategories);
+    const dispatch = useDispatch();
 
-//     useEffect(() => {
-//         const fetchAPI = async () => {
-//             try {
-//                 const data = await fetchCategories();
-//                 setCategoryList(data)
-//             } catch (err) {
+    useEffect(() => {
+        dispatch(fetchCategories())
+    }, [dispatch]);
 
-//             }
-//         }
-//         fetchAPI();
-//     }, []);
+    return (
+        <section>
+            <h2>Categories</h2>
+            {categories.map(category => {
+                return (
+                    <h4 key={category.id}>{category.name}</h4>
+                )
+            })}
+        </section>
+    )
+};
 
-//     const list = categoryList.map(category => {
-//         return (
-//             <h3 key={category.id}>{category.name}</h3>
-//         )
-//     });
-
-//     return (
-//         <section>
-//             {list}
-//         </section>
-//     )
-// };
-
-// export default Categories;
+export default Categories;
