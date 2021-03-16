@@ -1,30 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import { fetchBrands } from '../../http/productAPI';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchBrands, selectAllBrands } from '../../store/reducers/brandsSlice';
 
 const Brands = () => {
-    const [brandList, setBrandList] = useState([]);
+    const brands = useSelector(selectAllBrands);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        const fetchAPI = async () => {
-            try {
-                const data = await fetchBrands();
-                setBrandList(data)
-            } catch (err) {
+        dispatch(fetchBrands());
+    }, [dispatch])
 
-            }
-        }
-        fetchAPI();
-    }, [])
 
-    const list = brandList.map(brand => {
-        return (
-            <h3 key={brand.id}>{brand.name}</h3>
-        )
-    })
 
     return (
         <section>
-            {list}
+            <h2>Brands</h2>
+            {brands.map(brand => {
+                return (
+                    <h4 key={brand.id}>{brand.name}</h4>
+                )
+            })}
         </section>
     )
 };
