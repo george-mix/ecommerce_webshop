@@ -1,32 +1,37 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchProducts } from '../../http/productAPI';
+import { createSlice, createAsyncThunk, createEntityAdapter } from '@reduxjs/toolkit';
+import productAPI from '../../http/productAPI';
 
-export const fetchAllProducts = createAsyncThunk('test2/fetchPosts', async (brandId, categoryId, limit, page) => {
-    const response = await fetchProducts(brandId, categoryId, limit, page);
+export const fetchProducts = createAsyncThunk("products/fetchAll", async (param) => {
+    const { brandId, categoryId, limit, page } = param;
+    const response = productAPI.fetchProducts(brandId, categoryId, limit, page);
     return response;
 });
 
-const postSlice = createSlice({
-    name: 'products',
-    initialState: {
-        products: [],
-        loading: false,
-    },
-    reducers: {
+const productsAdapter = createEntityAdapter();
 
-    },
+export const initialState = productsAdapter.getInitialState({ loading: false });
+
+export const productsSlice = createSlice({
+    name: "products",
+    initialState,
+    reducers: {},
     extraReducers: {
-        [fetchAllProducts.pending]: (state, action) => {
+        [fetchProducts.pending]: (state, action) => {
             state.loading = true;
         },
-        [fetchAllProducts.fulfilled]: (state, action) => {
-            state.loading = false;
-            state.products = [...state.products, action.payload];
-        },
-        [fetchAllProducts.rejected]: (state, action) => {
+        [fetchProducts.fulfilled]: (state, action) => {
+            productsAdapter.upsertMany(state, action.payload);
             state.loading = false;
         },
+        [fetchProducts.rejected]: (state, action) => {
+            state.loading = false;
+            state.error = action.error;
+        }
     }
 });
 
-export default postSlice.reducer;
+export default productsSlice.reducer;
+
+export const {
+    selectAll: selectAllProducts
+} = productsAdapter.getSelectors(state => state.products);
