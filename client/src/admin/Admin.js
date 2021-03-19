@@ -1,48 +1,29 @@
-import React, { useState } from 'react';
-import { login } from '../http/adminAPI';
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { loginAdmin } from '../store/reducers/adminSlice';
 
 const Admin = () => {
-    const [formData, setFormData] = useState({
-        name: '',
-        password: ''
-    });
-
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value })
-    }
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        const test = async () => {
-            try {
-                const res = await login(formData);
-                console.log(res);
-            } catch (e) {
-
-            }
-        };
-        test();
+    const dispatch = useDispatch();
+    let param = {
+        name: "admin",
+        password: "123"
     }
 
     return (
         <div>
-            <h2>Login as an Admin</h2>
-            <form onSubmit={handleSubmit}>
+            <h2>Admin Login Page</h2>
+            <button onClick={() => dispatch(loginAdmin(param))} >login</button>
+            <form>
                 <input
                     type="username"
                     name="name"
                     placeholder="name"
-                    value={formData.name}
-                    onChange={handleChange}
                 />
                 <input
                     type="password"
                     name="password"
                     autoComplete="on"
                     placeholder="password"
-                    value={formData.password}
-                    onChange={handleChange}
                 />
                 <button type="submit">Sign in</button>
             </form>

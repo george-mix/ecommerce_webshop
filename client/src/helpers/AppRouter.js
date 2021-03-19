@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { authRoutes, publicRoutes, adminRoutes } from '../routes';
-import { SHOP_ROUTE } from '../utils/consts';
+import { SHOP_ROUTE } from './consts';
 
 
 const AppRouter = () => {

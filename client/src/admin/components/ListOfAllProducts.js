@@ -10,6 +10,7 @@ const ListOfAllProducts = () => {
 
     useEffect(() => {
         dispatch(fetchProducts(param));
+        // eslint-disable-next-line 
     }, [dispatch]);
 
 

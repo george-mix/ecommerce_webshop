@@ -1,4 +1,4 @@
-import { ADMIN_ROUTE, ADMIN_PANEL_ROUTE, ADMIN_SINGLE_PRODUCT_ROUTE, BASKET_ROUTE, SHOP_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, PRODUCT_ROUTE, ADMIN_EDIT_PRODUCT_ROUTE } from "./utils/consts";
+import { ADMIN_ROUTE, ADMIN_PANEL_ROUTE, ADMIN_SINGLE_PRODUCT_ROUTE, BASKET_ROUTE, SHOP_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, PRODUCT_ROUTE } from "./helpers/consts";
 import Admin from './admin/Admin';
 import Auth from './pages/Auth';
 import Basket from './pages/Basket';
@@ -6,7 +6,6 @@ import ProductDetails from './pages/ProductDetails';
 import Shop from './pages/Shop';
 import AdminPanel from "./admin/AdminPanel";
 import SingleProductPage from "./admin/SingleProductPage";
-import EditProductForm from "./admin/components/EditProductForm";
 
 export const adminRoutes = [
     {
@@ -20,10 +19,6 @@ export const adminRoutes = [
     {
         path: ADMIN_SINGLE_PRODUCT_ROUTE + '/:postId',
         Component: SingleProductPage
-    },
-    {
-        path: ADMIN_EDIT_PRODUCT_ROUTE + '/:postId',
-        Component: EditProductForm
     },
 ];
 
