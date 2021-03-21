@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 
-export const PrivateRoute = ({ component: Component, ...rest }) => (
+export const PrivateAdminRoute = ({ component: Component, ...rest }) => (
     <Route
         {...rest}
         render={(props) =>
@@ -9,7 +9,7 @@ export const PrivateRoute = ({ component: Component, ...rest }) => (
                 <Component {...props} />
             ) : (
                 <Redirect
-                    to={{ pathname: '/login', state: { from: props.location } }}
+                    to={{ pathname: '/admin', state: { from: props.location } }}
                 />
             )
         }

@@ -12,6 +12,9 @@ export const adminRoutes = [
         path: ADMIN_ROUTE,
         Component: Admin
     },
+];
+
+export const adminPrivateRoutes = [
     {
         path: ADMIN_PANEL_ROUTE,
         Component: AdminPanel
@@ -20,7 +23,7 @@ export const adminRoutes = [
         path: ADMIN_SINGLE_PRODUCT_ROUTE + '/:postId',
         Component: SingleProductPage
     },
-];
+]
 
 export const authRoutes = [
     {
