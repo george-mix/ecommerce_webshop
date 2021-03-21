@@ -1,18 +1,26 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { loginAdmin } from '../store/reducers/adminSlice';
 
 const Admin = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
     let param = {
         name: "admin",
         password: "123"
     }
 
+    const handleClick = () => {
+        dispatch(loginAdmin(param));
+        history.push('/admin/panel')
+
+    }
+
     return (
         <div>
             <h2>Admin Login Page</h2>
-            <button onClick={() => dispatch(loginAdmin(param))} >login</button>
+            <button onClick={handleClick} >login</button>
             <form>
                 <input
                     type="username"
