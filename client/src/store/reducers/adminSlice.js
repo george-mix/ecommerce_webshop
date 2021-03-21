@@ -5,7 +5,6 @@ export const loginAdmin = createAsyncThunk("admin/login", async (param, thunkAPI
     try {
         const response = await adminAPI.login(param);
         let data = response;
-        console.log('response', data);
         return data;
 
     } catch (e) {
@@ -55,3 +54,7 @@ export const adminSlice = createSlice({
 });
 
 export default adminSlice.reducer;
+
+export const adminSelector = state => state.admin;
+
+export const { clearState } = adminSlice.actions;

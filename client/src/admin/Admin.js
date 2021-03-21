@@ -1,40 +1,62 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { loginAdmin } from '../store/reducers/adminSlice';
+import { ADMIN_PANEL_ROUTE } from '../helpers/consts';
+import { loginAdmin, adminSelector, clearState } from '../store/reducers/adminSlice';
 
 const Admin = () => {
     const dispatch = useDispatch();
     const history = useHistory();
-    let param = {
-        name: "admin",
-        password: "123"
-    }
+    const { isSuccess } = useSelector(adminSelector);
+
+    const [name, setName] = useState("");
+    const [password, setPassword] = useState("");
+
+    const login = {
+        name: name,
+        password: password
+    };
 
     const handleClick = () => {
-        dispatch(loginAdmin(param));
-        history.push('/admin/panel')
+        dispatch(loginAdmin(login));
 
-    }
+    };
+
+    useEffect(() => {
+        return () => {
+            dispatch(clearState());
+        };
+    }, [dispatch]);
+
+
+    useEffect(() => {
+        if (isSuccess) {
+            history.push(ADMIN_PANEL_ROUTE);
+        }
+    }, [isSuccess, history])
+
 
     return (
         <div>
             <h2>Admin Login Page</h2>
-            <button onClick={handleClick} >login</button>
             <form>
                 <input
                     type="username"
                     name="name"
                     placeholder="name"
+                    value={login.name}
+                    onChange={(e) => setName(e.target.value)}
                 />
                 <input
                     type="password"
                     name="password"
                     autoComplete="on"
                     placeholder="password"
+                    value={login.password}
+                    onChange={(e) => setPassword(e.target.value)}
                 />
-                <button type="submit">Sign in</button>
             </form>
+            <button onClick={handleClick} >login</button>
         </div>
     )
 }
