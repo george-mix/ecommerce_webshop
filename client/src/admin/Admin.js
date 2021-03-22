@@ -19,7 +19,6 @@ const Admin = () => {
 
     const handleClick = () => {
         dispatch(loginAdmin(login));
-
     };
 
     useEffect(() => {
@@ -44,7 +43,7 @@ const Admin = () => {
                     type="username"
                     name="name"
                     placeholder="name"
-                    value={login.name}
+                    value={name}
                     onChange={(e) => setName(e.target.value)}
                 />
                 <input
@@ -52,7 +51,7 @@ const Admin = () => {
                     name="password"
                     autoComplete="on"
                     placeholder="password"
-                    value={login.password}
+                    value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
             </form>

@@ -7,7 +7,7 @@ import { PrivateAdminRoute } from './PrivateAdminRoute';
 
 
 const AppRouter = () => {
-    const isAuth = useSelector(state => state.test);
+    const isAuth = useSelector(state => state.user);
 
     return (
         <Switch>

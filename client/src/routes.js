@@ -1,11 +1,12 @@
 import { ADMIN_ROUTE, ADMIN_PANEL_ROUTE, ADMIN_SINGLE_PRODUCT_ROUTE, BASKET_ROUTE, SHOP_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, PRODUCT_ROUTE } from "./helpers/consts";
 import Admin from './admin/Admin';
-import Auth from './pages/Auth';
+import AdminPanel from "./admin/AdminPanel";
+import AdminSingleProductPage from "./admin/SingleProductPage";
 import Basket from './pages/Basket';
 import ProductDetails from './pages/ProductDetails';
 import Shop from './pages/Shop';
-import AdminPanel from "./admin/AdminPanel";
-import SingleProductPage from "./admin/SingleProductPage";
+import Login from './pages/Login';
+import SignUp from './pages/SignUp';
 
 export const adminRoutes = [
     {
@@ -21,7 +22,7 @@ export const adminPrivateRoutes = [
     },
     {
         path: ADMIN_SINGLE_PRODUCT_ROUTE + '/:postId',
-        Component: SingleProductPage
+        Component: AdminSingleProductPage
     },
 ]
 
@@ -40,11 +41,11 @@ export const publicRoutes = [
     },
     {
         path: LOGIN_ROUTE,
-        Component: Auth
+        Component: Login
     },
     {
         path: REGISTRATION_ROUTE,
-        Component: Auth
+        Component: SignUp
     },
     {
         path: PRODUCT_ROUTE + '/:id',

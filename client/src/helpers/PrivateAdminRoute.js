@@ -1,5 +1,6 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
+import { ADMIN_ROUTE } from './consts';
 
 export const PrivateAdminRoute = ({ component: Component, ...rest }) => (
     <Route
@@ -9,7 +10,7 @@ export const PrivateAdminRoute = ({ component: Component, ...rest }) => (
                 <Component {...props} />
             ) : (
                 <Redirect
-                    to={{ pathname: '/admin', state: { from: props.location } }}
+                    to={{ pathname: ADMIN_ROUTE, state: { from: props.location } }}
                 />
             )
         }
