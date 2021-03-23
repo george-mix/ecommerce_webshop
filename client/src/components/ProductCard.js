@@ -5,7 +5,6 @@ import { selectProductById } from '../store/reducers/productsSlice';
 const ProductCard = ({ oneProduct }) => {
     const id = oneProduct;
     const card = useSelector((state) => selectProductById(state, id));
-    console.log(card);
 
     return (
         <div>
