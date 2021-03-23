@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchCategories, selectAllCategories } from '../../store/reducers/categoriesSlice';
+import { fetchCategories, selectAllCategories } from '../store/reducers/categoriesSlice';
 
 const Categories = () => {
     const categories = useSelector(selectAllCategories);

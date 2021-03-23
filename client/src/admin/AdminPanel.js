@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router';
-import Brands from './components/Brands';
-import Categories from './components/Categories';
+import Brands from '../components/Brands';
+import Categories from '../components/Categories';
 import Products from './components/ListOfAllProducts';
 
 const AdminPanel = () => {
