@@ -10,6 +10,11 @@ const brandAPI = {
     async fetchBrands() {
         const { data } = await $host.get('/api/brand');
         return data;
+    },
+
+    async deleteBrand(id) {
+        const data = await $authhost.delete(`/api/brand/${id}`,);
+        return data;
     }
 };
 

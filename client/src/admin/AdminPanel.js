@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
-import Brands from '../components/Brands';
+import AdminBrands from './components/AdminBrands';
 import AddNewBrand from './components/modals/AddNewBrand';
 import Categories from '../components/Categories';
 import Products from './components/ListOfAllProducts';
@@ -21,7 +21,7 @@ const AdminPanel = () => {
             <h2>Admin Panel</h2>
             <button onClick={onLogOut}>Logout</button>
             <div>
-                <Brands />
+                <AdminBrands />
                 <button>New Brand</button>
                 <AddNewBrand show={brandVisible} onHide={() => setBrandVisible(false)} />
             </div>

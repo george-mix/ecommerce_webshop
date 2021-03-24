@@ -6,6 +6,11 @@ export const fetchBrands = createAsyncThunk("brands/fetchAll", async () => {
     return response;
 });
 
+export const deleteBrand = createAsyncThunk("brands/deleteOne", async (id) => {
+    const response = await brandAPI.deleteBrand(id);
+    return response;
+})
+
 export const brandsAdapter = createEntityAdapter();
 
 const initialState = brandsAdapter.getInitialState({ loading: false });
@@ -25,7 +30,18 @@ export const brandSlice = createSlice({
         [fetchBrands.rejected]: (state, action) => {
             state.loading = false;
             state.error = action.error;
-        }
+        },
+        [deleteBrand.pending]: (state, action) => {
+            state.loading = true;
+        },
+        [deleteBrand.fulfilled]: (state, action) => {
+            brandsAdapter.removeOne(state, action.payload);
+            state.loading = false;
+        },
+        [deleteBrand.rejected]: (state, action) => {
+            state.loading = false;
+            state.error = action.error;
+        },
     }
 });
 
