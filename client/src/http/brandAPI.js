@@ -12,8 +12,13 @@ const brandAPI = {
         return data;
     },
 
+    async updateBrand(id, name) {
+        const { data } = await $authhost.put(`/api/brand/${id}`, name);
+        return data;
+    },
+
     async deleteBrand(id) {
-        const data = await $authhost.delete(`/api/brand/${id}`,);
+        const { data } = await $authhost.delete(`/api/brand/${id}`,);
         return data;
     }
 };
