@@ -1,6 +1,17 @@
 import { createSlice, createAsyncThunk, createEntityAdapter } from '@reduxjs/toolkit';
 import userAPI from '../../http/userAPI';
 
+export const registerUser = createAsyncThunk("user/register", async (param, thunkAPI) => {
+    try {
+        const response = await userAPI.registration(param);
+        let data = response;
+        return data;
+    } catch (e) {
+        console.log('Error', e.response.data);
+        thunkAPI.rejectWithValue(e.response.data);
+    }
+});
+
 export const loginUser = createAsyncThunk("user/login", async (param, thunkAPI) => {
     try {
         const response = await userAPI.login(param);
@@ -43,6 +54,23 @@ export const userSlice = createSlice({
             state.isError = true;
             state.errorMessage = payload.message;
         },
+        [registerUser.pending]: (state) => {
+            state.isFetching = true;
+        },
+        [registerUser.fulfilled]: (state, action) => {
+            userAdapter.upsertOne(state, action.payload);
+            state.isFetching = false;
+            state.isSuccess = true;
+            state.isAuth = true;
+            return state;
+        },
+        [registerUser.rejected]: (state, payload) => {
+            console.log('payload', payload);
+            state.isFetching = false;
+            state.isError = true;
+            state.errorMessage = payload.message;
+        },
+
     }
 });
 
