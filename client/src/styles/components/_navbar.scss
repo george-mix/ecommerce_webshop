@@ -1,0 +1,21 @@
+.header {
+    position: relative;
+
+    &__navbar {
+        height: 5.6rem;
+        margin: 0 0.8rem;
+
+        &__logo {
+        font-family: 'New Tegomin', serif;
+        }
+
+       
+    }
+
+    &__contain {
+        display: flex;
+        justify-content: space-between;
+        height: 100%;
+        align-items: center;
+    }
+}
