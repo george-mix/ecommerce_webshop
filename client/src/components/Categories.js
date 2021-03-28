@@ -15,7 +15,10 @@ const Categories = () => {
             <h2>Categories</h2>
             {categories.map(category => {
                 return (
-                    <h4 key={category.id}>{category.name}</h4>
+                    <div key={category.id}>
+                        <input type="checkbox" />
+                        <h4 >{category.name}</h4>
+                    </div>
                 )
             })}
         </section>

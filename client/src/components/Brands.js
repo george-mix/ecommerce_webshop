@@ -17,7 +17,10 @@ const Brands = () => {
             <h2>Brands</h2>
             {brands.map(brand => {
                 return (
-                    <h4 key={brand.id}>{brand.name}</h4>
+                    <div key={brand.id}>
+                        <input type="checkbox" />
+                        <h4 >{brand.name}</h4>
+                    </div>
                 )
             })}
         </section>
