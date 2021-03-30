@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteBrand, fetchBrands, selectAllBrands } from '../../store/reducers/brandsSlice';
+import { fetchBrands, selectAllBrands } from '../../store/reducers/brandsSlice';
+import Brand from './Brand';
 import AddNewBrand from './modals/AddNewBrand';
-import UpdateBrand from './modals/UpdateBrand';
 
 const AdminBrands = () => {
     const [brandVisible, setBrandVisible] = useState(false);
@@ -13,18 +13,10 @@ const AdminBrands = () => {
         dispatch(fetchBrands());
     }, [dispatch]);
 
-    const onDelete = async (id) => {
-        dispatch(deleteBrand(id))
-    };
 
     const brandList = brands.map(brand => {
         return (
-            <div key={brand.id}>
-                <h4 >{brand.name}</h4>
-                <button onClick={() => onDelete(brand.id)}>x</button>
-                <button>Update</button>
-                <UpdateBrand id={brand.id} />
-            </div>
+            <Brand key={brand.id} brand={brand} />
         )
     });
 

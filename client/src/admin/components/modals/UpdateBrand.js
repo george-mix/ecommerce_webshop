@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import ReactDom from 'react-dom';
 import brandAPI from '../../../http/brandAPI';
 
-const UpdateBrand = ({ id }) => {
+const UpdateBrand = ({ id, open, onClose }) => {
     const [newBrandName, setNewBrandName] = useState("")
 
     let name = {
@@ -18,9 +19,12 @@ const UpdateBrand = ({ id }) => {
         }
     }
 
-    return (
-        <div>
-            <div>
+    if (!open) return null;
+
+    return ReactDom.createPortal(
+        <>
+            <div className="overlay" onClick={onClose} />
+            <div className="filtermodal">
                 <div>
                     <h3>New Brand Name</h3>
                 </div>
@@ -32,11 +36,12 @@ const UpdateBrand = ({ id }) => {
                         placeholder="new brand" />
                 </div>
                 <div>
-                    <button>Close</button>
+                    <button onClick={onClose}>Close</button>
                     <button onClick={updateBrand}>Save</button>
                 </div>
             </div>
-        </div>
+        </>,
+        document.getElementById('portal')
     )
 };
 
