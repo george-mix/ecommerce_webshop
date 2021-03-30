@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ReactDom from 'react-dom';
 import brandAPI from '../../../http/brandAPI';
 
 const AddNewBrand = ({ show, onHide }) => {
@@ -14,9 +15,13 @@ const AddNewBrand = ({ show, onHide }) => {
             console.log(e);
         }
     }
-    return (
-        <div>
-            <div>
+
+    if (!show) return null;
+
+    return ReactDom.createPortal(
+        <>
+            <div className="overlay" onClick={onHide} />
+            <div className="filtermodal">
                 <div>
                     <h3>AddNewBrand</h3>
                 </div>
@@ -32,7 +37,8 @@ const AddNewBrand = ({ show, onHide }) => {
                     <button onClick={addBrand}>Save</button>
                 </div>
             </div>
-        </div>
+        </>,
+        document.getElementById('portal')
     )
 };
 

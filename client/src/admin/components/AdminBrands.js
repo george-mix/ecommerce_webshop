@@ -24,7 +24,7 @@ const AdminBrands = () => {
         <section>
             <h2>Brands</h2>
             {brandList}
-            <button>New Brand</button>
+            <button onClick={() => setBrandVisible(true)}>New Brand</button>
             <AddNewBrand show={brandVisible} onHide={() => setBrandVisible(false)} />
         </section>
     )
