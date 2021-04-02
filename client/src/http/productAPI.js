@@ -12,9 +12,13 @@ const productAPI = {
         return data;
     },
 
-    async createProduct(product) {
-        const { data } = await $authhost.post('/api/product', product);
-        return data;
+    async createProduct(formData) {
+        try {
+            const { data } = await $authhost.post('/api/product', formData);
+            return data;
+        } catch (e) {
+            console.log(e);
+        }
     }
 };
 
