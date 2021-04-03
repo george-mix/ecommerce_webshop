@@ -6,6 +6,16 @@ export const fetchCategories = createAsyncThunk("categories/fetchAll", async () 
     return response;
 });
 
+export const deleteCategory = createAsyncThunk("categories/deleteOne", async (id) => {
+    await categoryAPI.deleteCategory(id);
+    return id;
+});
+
+export const addedCategory = createAsyncThunk("categories/addOne", async (name) => {
+    const response = await categoryAPI.createCategory(name);
+    return response;
+});
+
 export const categoriesAdapter = createEntityAdapter();
 
 const initialState = categoriesAdapter.getInitialState({ loading: false });
@@ -25,6 +35,28 @@ export const categoriesSlice = createSlice({
         [fetchCategories.rejected]: (state, action) => {
             state.loading = false;
             state.error = action.error
+        },
+        [deleteCategory.pending]: (state, action) => {
+            state.loading = true;
+        },
+        [deleteCategory.fulfilled]: (state, action) => {
+            categoriesAdapter.removeOne(state, action.payload)
+            state.loading = false;
+        },
+        [deleteCategory.rejected]: (state, action) => {
+            state.loading = false;
+            state.error = action.error;
+        },
+        [addedCategory.pending]: (state) => {
+            state.loading = true;
+        },
+        [addedCategory.fulfilled]: (state, action) => {
+            categoriesAdapter.upsertOne(state, action.payload);
+            state.loading = false;
+        },
+        [addedCategory.rejected]: (state, action) => {
+            state.loading = false;
+            state.error = action.error;
         }
     }
 });

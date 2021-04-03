@@ -10,6 +10,16 @@ const categoryAPI = {
     async fetchCategories() {
         const { data } = await $host.get('/api/category');
         return data;
+    },
+
+    async updateCategory(id, name) {
+        const { data } = await $authhost.put(`/api/category/${id}`, name);
+        return data;
+    },
+
+    async deleteCategory(id) {
+        const { data } = await $authhost.delete(`/api/category/${id}`,);
+        return data;
     }
 };
 

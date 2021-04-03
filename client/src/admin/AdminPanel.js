@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router';
 import AdminBrands from './components/AdminBrands';
-import Categories from '../components/Categories';
+import AdminCategories from './components/AdminCategories';
 import Products from './components/ListOfAllProducts';
 
 
@@ -19,7 +19,7 @@ const AdminPanel = () => {
             <h2>Admin Panel</h2>
             <button onClick={onLogOut}>Logout</button>
             <AdminBrands />
-            <Categories />
+            <AdminCategories />
             <Products />
         </div>
     )
