@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import ReactDom from 'react-dom';
-import { selectAllBrands } from '../../store/reducers/brandsSlice';
-import { selectAllCategories } from '../../store/reducers/categoriesSlice';
-import { addedProduct } from '../../store/reducers/productsSlice';
+import { selectAllBrands } from '../../../store/reducers/brandsSlice';
+import { selectAllCategories } from '../../../store/reducers/categoriesSlice';
+import { addedProduct } from '../../../store/reducers/productsSlice';
 
 const AddNewProduct = ({ show, onHide }) => {
     const dispatch = useDispatch();

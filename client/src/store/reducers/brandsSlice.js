@@ -7,9 +7,14 @@ export const fetchBrands = createAsyncThunk("brands/fetchAll", async () => {
 });
 
 export const deleteBrand = createAsyncThunk("brands/deleteOne", async (id) => {
-    const response = await brandAPI.deleteBrand(id);
+    await brandAPI.deleteBrand(id);
+    return id;
+});
+
+export const addedBrand = createAsyncThunk("brands/addOne", async (name) => {
+    const response = await brandAPI.createBrand(name);
     return response;
-})
+});
 
 export const brandsAdapter = createEntityAdapter();
 
@@ -35,13 +40,24 @@ export const brandSlice = createSlice({
             state.loading = true;
         },
         [deleteBrand.fulfilled]: (state, action) => {
-            brandsAdapter.removeOne(state, action.payload);
+            brandsAdapter.removeOne(state, action.payload)
             state.loading = false;
         },
         [deleteBrand.rejected]: (state, action) => {
             state.loading = false;
             state.error = action.error;
         },
+        [addedBrand.pending]: (state) => {
+            state.loading = true;
+        },
+        [addedBrand.fulfilled]: (state, action) => {
+            brandsAdapter.upsertOne(state, action.payload);
+            state.loading = false;
+        },
+        [addedBrand.rejected]: (state, action) => {
+            state.loading = false;
+            state.error = action.error;
+        }
     }
 });
 

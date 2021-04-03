@@ -7,7 +7,7 @@ class BrandController {
             const brand = await Brand.create({ name });
             return res.json(brand);
         } catch (e) {
-
+            console.log(e);
         }
     }
 

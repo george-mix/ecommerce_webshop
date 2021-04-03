@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchProducts, selectAllProducts } from '../../store/reducers/productsSlice';
-import AddNewProduct from './AddNewProduct';
+import AddNewProduct from './modals/AddNewProduct';
 
 const ListOfAllProducts = () => {
     const [modalIsOpen, setModalIsOpen] = useState(false);

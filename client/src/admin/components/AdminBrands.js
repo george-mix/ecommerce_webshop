@@ -7,12 +7,12 @@ import AddNewBrand from './modals/AddNewBrand';
 const AdminBrands = () => {
     const [brandVisible, setBrandVisible] = useState(false);
     const brands = useSelector(selectAllBrands);
+
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(fetchBrands());
     }, [dispatch]);
-
 
     const brandList = brands.map(brand => {
         return (
