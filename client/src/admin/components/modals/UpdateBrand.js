@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import ReactDom from 'react-dom';
-import brandAPI from '../../../http/brandAPI';
+import { useDispatch } from 'react-redux';
+import { updatedBrand } from '../../../store/reducers/brandsSlice';
 
 const UpdateBrand = ({ id, open, onClose }) => {
-    const [newBrandName, setNewBrandName] = useState("")
+    const dispatch = useDispatch();
 
-    let name = {
-        name: newBrandName
-    };
+    const [newBrandName, setNewBrandName] = useState("")
 
     const updateBrand = async () => {
         try {
-            await brandAPI.updateBrand(id, name);
+            let name = newBrandName;
+            await dispatch(updatedBrand({ id, name }));
             setNewBrandName("");
-
+            onClose();
         } catch (e) {
             console.log(e);
         }

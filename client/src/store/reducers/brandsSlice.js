@@ -16,6 +16,14 @@ export const addedBrand = createAsyncThunk("brands/addOne", async (name) => {
     return response;
 });
 
+export const updatedBrand = createAsyncThunk("brands/updateBrand", async ({ id, name }) => {
+    let param = {
+        name: name
+    }
+    await brandAPI.updateBrand(id, param);
+    return { id, name };
+});
+
 export const brandsAdapter = createEntityAdapter();
 
 const initialState = brandsAdapter.getInitialState({ loading: false });
@@ -57,7 +65,21 @@ export const brandSlice = createSlice({
         [addedBrand.rejected]: (state, action) => {
             state.loading = false;
             state.error = action.error;
-        }
+        },
+        [updatedBrand.pending]: (state) => {
+            state.loading = true
+        },
+        [updatedBrand.fulfilled]: (state, action) => {
+            brandsAdapter.updateOne(state, {
+                id: action.payload.id,
+                changes: action.payload
+            });
+            state.loading = false;
+        },
+        [updatedBrand.rejected]: (state, action) => {
+            state.loading = false;
+            state.error = action.error;
+        },
     }
 });
 
