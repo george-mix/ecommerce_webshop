@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import ReactDom from 'react-dom';
-import categoryAPI from '../../../http/categoryAPI';
+import { useDispatch } from 'react-redux';
+import { updatedCategory } from '../../../store/reducers/categoriesSlice';
 
 const UpdateCategory = ({ id, open, onClose }) => {
-    const [newCategoryName, setNewCategoryName] = useState("")
+    const dispatch = useDispatch();
 
-    let name = {
-        name: newCategoryName
-    };
+    const [newCategoryName, setNewCategoryName] = useState("")
 
     const updateCategory = async () => {
         try {
-            await categoryAPI.updateCategory(id, name);
+            let name = newCategoryName;
+            await dispatch(updatedCategory({ id, name }));
             setNewCategoryName("");
-
+            onClose();
         } catch (e) {
             console.log(e);
         }

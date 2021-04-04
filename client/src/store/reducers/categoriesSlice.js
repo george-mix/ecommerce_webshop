@@ -16,6 +16,14 @@ export const addedCategory = createAsyncThunk("categories/addOne", async (name) 
     return response;
 });
 
+export const updatedCategory = createAsyncThunk("brands/updateCategory", async ({ id, name }) => {
+    let param = {
+        name: name
+    }
+    await categoryAPI.updateCategory(id, param);
+    return { id, name };
+});
+
 export const categoriesAdapter = createEntityAdapter();
 
 const initialState = categoriesAdapter.getInitialState({ loading: false });
@@ -57,7 +65,21 @@ export const categoriesSlice = createSlice({
         [addedCategory.rejected]: (state, action) => {
             state.loading = false;
             state.error = action.error;
-        }
+        },
+        [updatedCategory.pending]: (state) => {
+            state.loading = true
+        },
+        [updatedCategory.fulfilled]: (state, action) => {
+            categoriesAdapter.updateOne(state, {
+                id: action.payload.id,
+                changes: action.payload
+            });
+            state.loading = false;
+        },
+        [updatedCategory.rejected]: (state, action) => {
+            state.loading = false;
+            state.error = action.error;
+        },
     }
 });
 
