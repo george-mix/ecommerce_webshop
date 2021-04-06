@@ -17,7 +17,7 @@ class ProductController {
                 info = JSON.parse(info);
                 info.forEach(i =>
                     ProductInfo.create({
-                        title: i.title,
+                        name: i.title,
                         description: i.description,
                         productId: product.id
                     })

@@ -12,6 +12,10 @@ const AddNewProduct = ({ show, onHide }) => {
     const [price, setPrice] = useState(0);
     const [file, setFile] = useState(null);
     const [info, setInfo] = useState([]);
+    const [brand, setBrand] = useState('');
+    const [category, setCategory] = useState('');
+
+
 
     const brands = useSelector(selectAllBrands);
     const categories = useSelector(selectAllCategories);
@@ -33,16 +37,27 @@ const AddNewProduct = ({ show, onHide }) => {
         setFile(e.target.files[0])
     };
 
-    const onProductSave = async () => {
+    const onProductSave = async (event) => {
+        event.preventDefault();
         const formData = new FormData();
+        formData.append('brandId', brand);
+        formData.append('categoryId', category);
         formData.append('name', name);
         formData.append('price', `${price}`);
+        if (!file) return null;
         formData.append('img', file);
         formData.append('info', JSON.stringify(info));
-        for (var key of formData.entries()) {
-            console.log(key[0] + ', ' + key[1]);
-        };
+
         await dispatch(addedProduct(formData));
+
+        setName('');
+        setPrice(0);
+        setFile(null);
+        setInfo([]);
+        setBrand('');
+        setCategory('');
+
+        onHide();
     };
 
     if (!show) return null;
@@ -50,23 +65,32 @@ const AddNewProduct = ({ show, onHide }) => {
     return ReactDom.createPortal(
         <>
             <div className="overlay" onClick={onHide} />
-            <div className="filtermodal">
+            <form className="filtermodal" onSubmit={onProductSave}>
                 <h2>Add new Product</h2>
                 <div>
                     <label>Select Brand</label>
-                    <select>
-                        <option>...</option>
+                    <select
+                        value={brand}
+                        onChange={e => setBrand(e.target.value)}
+                        required>
+                        <option value={""}>...</option>
                         {brands.map(brand => {
-                            return <option key={brand.id}>{brand.name}</option>
+                            return <option key={brand.id} value={brand.id}>
+                                {brand.name}
+                            </option>
                         })}
                     </select>
                 </div>
                 <div>
                     <label>Select Category</label>
-                    <select>
-                        <option>...</option>
+                    <select
+                        value={category}
+                        onChange={e => setCategory(e.target.value)}
+                        required>
+                        <option value={""}>...</option>
                         {categories.map(category => {
-                            return <option key={category.id}>{category.name}</option>
+                            return <option key={category.id} value={category.id}>{category.name}
+                            </option>
                         })}
                     </select>
                 </div>
@@ -75,20 +99,22 @@ const AddNewProduct = ({ show, onHide }) => {
                     <input
                         value={name}
                         onChange={e => setName(e.target.value)}
-                        placeholder="Enter name" />
+                        placeholder="Enter name"
+                        required />
                 </div>
                 <div>
                     <label>Product Price</label>
                     <input
                         value={price}
-                        onChange={e => setPrice(Number(e.target.value))}
-                        placeholder="Enter price" />
+                        onChange={e => setPrice(Number(e.target.value) || 0)}
+                        placeholder="Enter price"
+                        required />
                 </div>
                 <div>
                     <label>Product Image</label>
-                    <input type="file" onChange={selectFile} />
+                    <input required type="file" onChange={selectFile} />
                 </div>
-                <button onClick={addInfo}>Add Info</button>
+                <button type="button" onClick={addInfo}>Add Info</button>
                 <div>
                     {info.map(inf => {
                         return (
@@ -107,10 +133,10 @@ const AddNewProduct = ({ show, onHide }) => {
                     )}
                 </div>
                 <div>
-                    <button onClick={onHide}>Close</button>
-                    <button onClick={onProductSave}>Save</button>
+                    <button type="button" onClick={onHide}>Close</button>
+                    <button type="submit">Save</button>
                 </div>
-            </div>
+            </form>
         </>,
         document.getElementById('portal')
     )
