@@ -89,10 +89,11 @@ class ProductController {
                 res.status(400).json({ message: 'ID not specified' })
             };
             const brand = await Product.destroy({ where: { id: id } });
+            const info = await ProductInfo.destroy({ where: { productId: id } });
             if (brand === 0) {
                 return res.status(500).json({ message: 'No such ID' })
             };
-            if (brand === 1) {
+            if (brand === 1 && info === 1) {
                 return res.json({ message: `Product ${id} Successfully deleted` })
             };
         } catch (e) {

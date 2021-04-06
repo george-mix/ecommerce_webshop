@@ -8,8 +8,13 @@ export const fetchProducts = createAsyncThunk("products/fetchAll", async (param)
 });
 
 export const addedProduct = createAsyncThunk("product/addOne", async (product) => {
-    const response = productAPI.createProduct(product)
+    const response = await productAPI.createProduct(product);
     return response;
+});
+
+export const deletedProduct = createAsyncThunk("product/deleteOne", async (id) => {
+    await productAPI.deleteProduct(id);
+    return id
 });
 
 const productsAdapter = createEntityAdapter();
@@ -40,6 +45,17 @@ export const productsSlice = createSlice({
             state.loading = false;
         },
         [addedProduct.rejected]: (state, action) => {
+            state.loading = false;
+            state.error = action.error;
+        },
+        [deletedProduct.pending]: (state) => {
+            state.loading = true;
+        },
+        [deletedProduct.fulfilled]: (state, action) => {
+            productAPI.removeOne(state, action.payload);
+            state.loading = false;
+        },
+        [deletedProduct.error]: (state, action) => {
             state.loading = false;
             state.error = action.error;
         }

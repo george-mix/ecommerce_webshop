@@ -8,7 +8,7 @@ const productAPI = {
     },
 
     async fetchOneProduct(id) {
-        const { data } = await $host.get('/api/product' + id);
+        const { data } = await $host.get(`/api/product/` + id);
         return data;
     },
 
@@ -16,6 +16,15 @@ const productAPI = {
         try {
             const { data } = await $authhost.post('/api/product', formData);
             return data;
+        } catch (e) {
+            console.log(e);
+        }
+    },
+
+    async deleteProduct(id) {
+        try {
+            const { data } = await $authhost.delete('/api/product/' + id)
+            return data
         } catch (e) {
             console.log(e);
         }
