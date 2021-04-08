@@ -17,7 +17,7 @@ class ProductController {
                 info = JSON.parse(info);
                 info.forEach(i =>
                     ProductInfo.create({
-                        name: i.title,
+                        name: i.name,
                         description: i.description,
                         productId: product.id
                     })
@@ -72,13 +72,15 @@ class ProductController {
         }
     }
 
-    async updateOne(req, res) {
+    async updateOne(req, res, next) {
         try {
             const { id } = req.params;
+
             const updatedProduct = await Product.update(req.body, { where: { id: id } });
             return res.json(updatedProduct);
 
         } catch (e) {
+            next(ApiError.badRequest(e.message));
         }
     }
 
@@ -88,12 +90,13 @@ class ProductController {
             if (!id) {
                 res.status(400).json({ message: 'ID not specified' })
             };
-            const brand = await Product.destroy({ where: { id: id } });
             const info = await ProductInfo.destroy({ where: { productId: id } });
+            const brand = await Product.destroy({ where: { id: id } });
+            console.log(info);
             if (brand === 0) {
                 return res.status(500).json({ message: 'No such ID' })
             };
-            if (brand === 1 && info === 1) {
+            if (brand === 1) {
                 return res.json({ message: `Product ${id} Successfully deleted` })
             };
         } catch (e) {

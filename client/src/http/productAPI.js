@@ -21,6 +21,15 @@ const productAPI = {
         }
     },
 
+    async updateProduct(id, formData) {
+        try {
+            const { data } = await $authhost.post(`/api/product/${id}`, formData);
+            return data;
+        } catch (e) {
+            console.log(e);
+        }
+    },
+
     async deleteProduct(id) {
         try {
             const { data } = await $authhost.delete('/api/product/' + id)

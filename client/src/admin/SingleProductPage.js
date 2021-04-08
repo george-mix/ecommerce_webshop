@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { ADMIN_PANEL_ROUTE } from '../helpers/consts';
 import productAPI from '../http/productAPI';
 import { deletedProduct } from '../store/reducers/productsSlice';
+import UpdateForm from './components/UpdateForm';
 
 
 const SinglePostPage = () => {
@@ -24,7 +25,7 @@ const SinglePostPage = () => {
             }
         };
         fetchData();
-    }, []);
+    }, [postId]);
 
     const onDelete = () => {
         dispatch(deletedProduct(postId));
@@ -36,11 +37,9 @@ const SinglePostPage = () => {
     return (
         <div>
             <button><Link to={ADMIN_PANEL_ROUTE}>Back</Link></button>
-
-            <h1>{product.name}</h1>
-            <h2></h2>
             <button onClick={onDelete}>Delete</button>
 
+            <UpdateForm product={product} />
         </div>
     )
 };

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import ReactDom from 'react-dom';
-import { selectAllBrands } from '../../../store/reducers/brandsSlice';
-import { selectAllCategories } from '../../../store/reducers/categoriesSlice';
 import { addedProduct } from '../../../store/reducers/productsSlice';
+import BrandSelector from '../BrandSelector';
+import CategorySelector from '../CategorySelector';
+import Info from '../Info';
 
 const AddNewProduct = ({ show, onHide }) => {
     const dispatch = useDispatch();
@@ -14,24 +15,6 @@ const AddNewProduct = ({ show, onHide }) => {
     const [info, setInfo] = useState([]);
     const [brand, setBrand] = useState('');
     const [category, setCategory] = useState('');
-
-
-
-    const brands = useSelector(selectAllBrands);
-    const categories = useSelector(selectAllCategories);
-
-    const addInfo = () => {
-        setInfo([...info, { title: '', description: '', number: Date.now() }])
-    };
-
-    const deleteInfo = (num) => {
-        setInfo(info.filter(i => i.number !== num))
-    };
-
-
-    const changeInfo = (key, value, number) => {
-        setInfo(info.map(i => i.number === number ? { ...i, [key]: value } : i))
-    };
 
     const selectFile = (e) => {
         setFile(e.target.files[0])
@@ -67,33 +50,8 @@ const AddNewProduct = ({ show, onHide }) => {
             <div className="overlay" onClick={onHide} />
             <form className="filtermodal" onSubmit={onProductSave}>
                 <h2>Add new Product</h2>
-                <div>
-                    <label>Select Brand</label>
-                    <select
-                        value={brand}
-                        onChange={e => setBrand(e.target.value)}
-                        required>
-                        <option value={""}>...</option>
-                        {brands.map(brand => {
-                            return <option key={brand.id} value={brand.id}>
-                                {brand.name}
-                            </option>
-                        })}
-                    </select>
-                </div>
-                <div>
-                    <label>Select Category</label>
-                    <select
-                        value={category}
-                        onChange={e => setCategory(e.target.value)}
-                        required>
-                        <option value={""}>...</option>
-                        {categories.map(category => {
-                            return <option key={category.id} value={category.id}>{category.name}
-                            </option>
-                        })}
-                    </select>
-                </div>
+                <BrandSelector setBrand={setBrand} brand={brand} />
+                <CategorySelector setCategory={setCategory} category={category} />
                 <div>
                     <label>Product Name</label>
                     <input
@@ -114,24 +72,11 @@ const AddNewProduct = ({ show, onHide }) => {
                     <label>Product Image</label>
                     <input required type="file" onChange={selectFile} />
                 </div>
-                <button type="button" onClick={addInfo}>Add Info</button>
+
                 <div>
-                    {info.map(inf => {
-                        return (
-                            <div key={inf.number}>
-                                <input
-                                    value={inf.title}
-                                    onChange={(e) => changeInfo('title', e.target.value, inf.number)}
-                                    placeholder="name" />
-                                <input
-                                    value={inf.description}
-                                    onChange={(e) => changeInfo('description', e.target.value, inf.number)}
-                                    placeholder="description" />
-                                <button onClick={() => deleteInfo(inf.number)}>Delete</button>
-                            </div>)
-                    }
-                    )}
+
                 </div>
+                <Info setInfo={setInfo} info={info} />
                 <div>
                     <button type="button" onClick={onHide}>Close</button>
                     <button type="submit">Save</button>
