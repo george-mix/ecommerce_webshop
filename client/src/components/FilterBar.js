@@ -11,8 +11,8 @@ const FilterBar = () => {
     }
     return (
         <div className="filterbar">
-            <div>Brands: <span>All</span></div>
-            <div>Categories: <span>All</span></div>
+            <div>Brand: <span>All</span></div>
+            <div>Category: <span>All</span></div>
             <div onClick={handleClick} className="filterbar__right">
                 <i className="fas fa-filter"></i>
                 <h5>Filter</h5>

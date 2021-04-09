@@ -10,7 +10,7 @@ const ProductCard = ({ oneProduct }) => {
 
     return (
         <div>
-            <img alt={card.name} width={150} height={150} src={process.env.REACT_APP_API_URL + card.img} />
+            <img alt={card.name} width={150} height={150} src={`${process.env.REACT_APP_API_URL}/${card.img}`} />
             <h4>{card.name}</h4>
             <h5>{card.price}</h5>
             <Link to={`${PRODUCT_ROUTE}/${id}`}>

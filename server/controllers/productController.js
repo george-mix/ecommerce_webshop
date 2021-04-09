@@ -40,16 +40,16 @@ class ProductController {
             let offset = page * limit - limit;
             let products;
             if (!brandId && !categoryId) {
-                products = await Product.findAll({ limit, offset })
+                products = await Product.findAndCountAll({ limit, offset })
             }
             if (brandId && !categoryId) {
-                products = await Product.findAll({ where: { brandId }, limit, offset })
+                products = await Product.findAndCountAll({ where: { brandId }, limit, offset })
             }
             if (!brandId && categoryId) {
-                products = await Product.findAll({ where: { categoryId }, limit, offset })
+                products = await Product.findAndCountAll({ where: { categoryId }, limit, offset })
             }
             if (brandId && categoryId) {
-                products = await Product.findAll({ where: { brandId, categoryId }, limit, offset })
+                products = await Product.findAndCountAll({ where: { brandId, categoryId }, limit, offset })
             }
             return res.json(products);
         } catch (e) {

@@ -3,7 +3,7 @@ import { $authhost, $host } from './index';
 const productAPI = {
 
     async fetchProducts(brandId, categoryId, limit, page) {
-        const { data } = await $host.get('/api/product', { params: brandId, categoryId, limit, page });
+        const { data } = await $host.get('/api/product', { params: { brandId, categoryId, limit, page } });
         return data;
     },
 

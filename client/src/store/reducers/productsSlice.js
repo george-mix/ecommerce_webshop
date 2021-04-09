@@ -23,7 +23,7 @@ export const deletedProduct = createAsyncThunk("product/deleteOne", async (id) =
 
 const productsAdapter = createEntityAdapter();
 
-export const initialState = productsAdapter.getInitialState({ loading: false });
+export const initialState = productsAdapter.getInitialState({ count: 0, loading: false });
 
 export const productsSlice = createSlice({
     name: "products",
@@ -34,7 +34,9 @@ export const productsSlice = createSlice({
             state.loading = true;
         },
         [fetchProducts.fulfilled]: (state, action) => {
-            productsAdapter.upsertMany(state, action.payload);
+            state.count = action.payload.count;
+            productsAdapter.removeAll(state);
+            productsAdapter.upsertMany(state, action.payload.rows);
             state.loading = false;
         },
         [fetchProducts.rejected]: (state, action) => {
