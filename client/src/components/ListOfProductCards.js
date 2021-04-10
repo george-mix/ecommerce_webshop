@@ -10,18 +10,19 @@ const ListOfProductCards = () => {
 
     const pageLimit = useSelector(state => state.products.limit);
     const filterByBrand = useSelector(state => state.brands.selected);
+    const filterByCategory = useSelector(state => state.categories.selected);
     const [pageNumber, setPageNumber] = useState(1);
 
 
     useEffect(() => {
         const param = {
             brandId: filterByBrand,
-            categoryId: null,
+            categoryId: filterByCategory,
             limit: pageLimit,
             page: pageNumber
         };
         dispatch(fetchProducts(param));
-    }, [dispatch, pageNumber, pageLimit, filterByBrand]);
+    }, [dispatch, pageNumber, pageLimit, filterByBrand, filterByCategory]);
 
 
     const list = products.map(product => {

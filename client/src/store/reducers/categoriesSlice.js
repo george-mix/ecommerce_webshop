@@ -26,12 +26,20 @@ export const updatedCategory = createAsyncThunk("brands/updateCategory", async (
 
 export const categoriesAdapter = createEntityAdapter();
 
-const initialState = categoriesAdapter.getInitialState({ loading: false });
+const initialState = categoriesAdapter.getInitialState({ selected: null, loading: false });
 
 export const categoriesSlice = createSlice({
     name: "categories",
     initialState,
-    reducers: {},
+    reducers: {
+        selectedCategory(state, action) {
+            if (action.payload === "all") {
+                state.selected = null
+            } else {
+                state.selected = action.payload
+            }
+        }
+    },
     extraReducers: {
         [fetchCategories.pending]: (state, action) => {
             state.loading = true
@@ -82,6 +90,10 @@ export const categoriesSlice = createSlice({
         },
     }
 });
+
+export const {
+    selectedCategory
+} = categoriesSlice.actions;
 
 export default categoriesSlice.reducer;
 

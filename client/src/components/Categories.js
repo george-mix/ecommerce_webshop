@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchCategories, selectAllCategories } from '../store/reducers/categoriesSlice';
 
-const Categories = () => {
+const Categories = ({ setCategoryFilter }) => {
     const categories = useSelector(selectAllCategories);
     const dispatch = useDispatch();
 
@@ -11,17 +11,19 @@ const Categories = () => {
     }, [dispatch]);
 
     return (
-        <section>
+        <div>
             <h2>Categories</h2>
-            {categories.map(category => {
-                return (
-                    <div key={category.id}>
-                        <input type="checkbox" />
-                        <h4 >{category.name}</h4>
-                    </div>
-                )
-            })}
-        </section>
+            <select
+                defaultValue="all"
+                onChange={e => setCategoryFilter(e.target.value)}>
+                <option value="all">All</option>
+                {categories.map(category => {
+                    return <option key={category.id} value={category.id}>
+                        {category.name}
+                    </option>
+                })}
+            </select>
+        </div>
     )
 };
 

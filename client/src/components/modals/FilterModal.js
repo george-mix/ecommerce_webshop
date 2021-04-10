@@ -6,16 +6,19 @@ import Categories from '../Categories';
 import CardsPerPage from '../CardsPerPage';
 import { productsLimited } from '../../store/reducers/productsSlice';
 import { selectedBrand } from '../../store/reducers/brandsSlice';
+import { selectedCategory } from '../../store/reducers/categoriesSlice';
 
 const FilterModal = ({ open, onClose }) => {
     const dispatch = useDispatch();
 
     const [productsPerPage, setProductsPerPage] = useState(10);
     const [brandFilter, setBrandFilter] = useState(null);
+    const [categoryFilter, setCategoryFilter] = useState(null);
 
     const handleClick = () => {
         dispatch(productsLimited(productsPerPage));
         dispatch(selectedBrand(brandFilter));
+        dispatch(selectedCategory(categoryFilter));
     };
 
     if (!open) return null;
@@ -28,7 +31,7 @@ const FilterModal = ({ open, onClose }) => {
                 <h3>Filters</h3>
                 <CardsPerPage setProductsPerPage={setProductsPerPage} />
                 <Brands setBrandFilter={setBrandFilter} />
-                <Categories />
+                <Categories setCategoryFilter={setCategoryFilter} />
                 <button onClick={handleClick}>Filter</button>
             </div>
         </>,
