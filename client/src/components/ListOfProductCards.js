@@ -8,10 +8,9 @@ const ListOfProductCards = () => {
     const products = useSelector(selectAllProducts);
     const dispatch = useDispatch();
 
-    const [pageLimit, setPageLimit] = useState(10);
+    const pageLimit = useSelector(state => state.products.limit)
     const [pageNumber, setPageNumber] = useState(1);
 
-    console.log(products);
 
     useEffect(() => {
         const param = { brandId: null, categoryId: null, limit: pageLimit, page: pageNumber };

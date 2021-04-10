@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import FilterModal from './modals/FilterModal';
-import Brands from './Brands';
-import Categories from './Categories';
 
 const FilterBar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -17,10 +15,8 @@ const FilterBar = () => {
                 <i className="fas fa-filter"></i>
                 <h5>Filter</h5>
             </div>
-            <FilterModal open={isOpen} onClose={() => setIsOpen(false)}>
-                <Brands />
-                <Categories />
-            </FilterModal>
+            <FilterModal open={isOpen} onClose={() => setIsOpen(false)} />
+
         </div>
     )
 };
