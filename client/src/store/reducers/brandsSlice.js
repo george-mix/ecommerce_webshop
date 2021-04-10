@@ -26,12 +26,20 @@ export const updatedBrand = createAsyncThunk("brands/updateBrand", async ({ id, 
 
 export const brandsAdapter = createEntityAdapter();
 
-const initialState = brandsAdapter.getInitialState({ loading: false });
+const initialState = brandsAdapter.getInitialState({ selected: null, loading: false });
 
 export const brandSlice = createSlice({
     name: "brands",
     initialState,
-    reducers: {},
+    reducers: {
+        selectedBrand(state, action) {
+            if (action.payload === "all") {
+                state.selected = null
+            } else {
+                state.selected = action.payload
+            }
+        }
+    },
     extraReducers: {
         [fetchBrands.pending]: (state, action) => {
             state.loading = true;
@@ -82,6 +90,10 @@ export const brandSlice = createSlice({
         },
     }
 });
+
+export const {
+    selectedBrand
+} = brandSlice.actions;
 
 export default brandSlice.reducer;
 

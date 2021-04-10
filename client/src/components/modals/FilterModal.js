@@ -5,14 +5,17 @@ import Brands from '../Brands';
 import Categories from '../Categories';
 import CardsPerPage from '../CardsPerPage';
 import { productsLimited } from '../../store/reducers/productsSlice';
+import { selectedBrand } from '../../store/reducers/brandsSlice';
 
 const FilterModal = ({ open, onClose }) => {
     const dispatch = useDispatch();
 
     const [productsPerPage, setProductsPerPage] = useState(10);
+    const [brandFilter, setBrandFilter] = useState(null);
 
     const handleClick = () => {
         dispatch(productsLimited(productsPerPage));
+        dispatch(selectedBrand(brandFilter));
     };
 
     if (!open) return null;
@@ -24,7 +27,7 @@ const FilterModal = ({ open, onClose }) => {
                 <i onClick={onClose} className="fas fa-times"></i>
                 <h3>Filters</h3>
                 <CardsPerPage setProductsPerPage={setProductsPerPage} />
-                <Brands />
+                <Brands setBrandFilter={setBrandFilter} />
                 <Categories />
                 <button onClick={handleClick}>Filter</button>
             </div>
