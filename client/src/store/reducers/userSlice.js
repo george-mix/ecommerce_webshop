@@ -77,4 +77,4 @@ export const userSlice = createSlice({
 
 export default userSlice.reducer;
 
-export const userSelector = state => state.user;
+export const userSelector = state => state.persistedReducer.user;

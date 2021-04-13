@@ -8,9 +8,9 @@ const ListOfProductCards = () => {
     const products = useSelector(selectAllProducts);
     const dispatch = useDispatch();
 
-    const pageLimit = useSelector(state => state.products.limit);
-    const filterByBrand = useSelector(state => state.brands.selected);
-    const filterByCategory = useSelector(state => state.categories.selected);
+    const pageLimit = useSelector(state => state.persistedReducer.products.limit);
+    const filterByBrand = useSelector(state => state.persistedReducer.brands.selected);
+    const filterByCategory = useSelector(state => state.persistedReducer.categories.selected);
     const [pageNumber, setPageNumber] = useState(1);
 
 

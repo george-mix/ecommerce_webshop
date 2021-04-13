@@ -96,4 +96,4 @@ export default productsSlice.reducer;
 export const {
     selectAll: selectAllProducts,
     selectById: selectProductById
-} = productsAdapter.getSelectors(state => state.products);
+} = productsAdapter.getSelectors(state => state.persistedReducer.products);

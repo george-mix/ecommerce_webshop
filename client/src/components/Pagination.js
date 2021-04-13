@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import ReactPaginate from 'react-paginate';
 
 const Pagination = ({ pageLimit, setPageNumber }) => {
-    const allProducts = useSelector(state => state.products.count);
+    const allProducts = useSelector(state => state.persistedReducer.products.count);
     const pageCount = Math.ceil(allProducts / pageLimit);
 
     const handlePageClick = ({ selected: selectedPage }) => {

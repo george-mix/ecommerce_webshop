@@ -30,7 +30,6 @@ export const adminSlice = createSlice({
             state.isError = false;
             state.isSuccess = false;
             state.isFetching = false;
-
             return state;
         },
     },
@@ -40,6 +39,7 @@ export const adminSlice = createSlice({
         },
         [loginAdmin.fulfilled]: (state, action) => {
             adminAdapter.upsertOne(state, action.payload);
+            state.isAdmin = true;
             state.isFetching = false;
             state.isSuccess = true;
             return state;
@@ -55,6 +55,6 @@ export const adminSlice = createSlice({
 
 export default adminSlice.reducer;
 
-export const adminSelector = state => state.admin;
+export const adminSelector = state => state.persistedReducer.admin;
 
 export const { clearState } = adminSlice.actions;

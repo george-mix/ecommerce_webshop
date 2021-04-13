@@ -99,4 +99,4 @@ export default categoriesSlice.reducer;
 
 export const {
     selectAll: selectAllCategories
-} = categoriesAdapter.getSelectors(state => state.categories);
+} = categoriesAdapter.getSelectors(state => state.persistedReducer.categories);

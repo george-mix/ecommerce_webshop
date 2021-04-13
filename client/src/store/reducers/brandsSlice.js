@@ -99,4 +99,4 @@ export default brandSlice.reducer;
 
 export const {
     selectAll: selectAllBrands
-} = brandsAdapter.getSelectors(state => state.brands);
+} = brandsAdapter.getSelectors(state => state.persistedReducer.brands);
