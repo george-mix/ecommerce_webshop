@@ -32,6 +32,10 @@ export const adminSlice = createSlice({
             state.isFetching = false;
             return state;
         },
+        logoutAdmin(state) {
+            state.isAdmin = false;
+            adminAdapter.removeAll(state);
+        }
     },
     extraReducers: {
         [loginAdmin.pending]: (state) => {
@@ -53,8 +57,10 @@ export const adminSlice = createSlice({
     }
 });
 
+export const { clearState,
+    logoutAdmin
+} = adminSlice.actions;
+
 export default adminSlice.reducer;
 
 export const adminSelector = state => state.persistedReducer.admin;
-
-export const { clearState } = adminSlice.actions;

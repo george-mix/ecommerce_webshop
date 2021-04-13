@@ -1,17 +1,28 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { logoutUser } from '../store/reducers/userSlice';
 import { BASKET_ROUTE, LOGIN_ROUTE, SHOP_ROUTE } from '../helpers/consts';
 
 const Navbar = () => {
+    const dispatch = useDispatch()
+
+    const { isAuth } = useSelector(state => state.persistedReducer.user);
+
+    const onLogout = () => {
+        localStorage.removeItem('token');
+        dispatch(logoutUser())
+    };
 
     return (
         <header className="header">
             <div className="header__navbar">
                 <div className="header__contain">
-                    <Link to={LOGIN_ROUTE}>
-                        <button>Sign In</button>
-                    </Link>
+                    {!isAuth ?
+                        <Link to={LOGIN_ROUTE}>
+                            <button>Sign In</button>
+                        </Link> :
+                        <button onClick={onLogout}>Log out</button>}
                     <Link to={SHOP_ROUTE}>
                         <h3 className="header__navbar__logo">Kickshow</h3>
                     </Link>

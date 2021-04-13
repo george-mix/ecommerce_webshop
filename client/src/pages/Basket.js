@@ -1,13 +1,11 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router';
-import { userSelector } from '../store/reducers/userSlice';
 import { LOGIN_ROUTE } from '../helpers/consts';
-import basketAPI from '../http/basketAPI';
 import { fetchedBasket } from '../store/reducers/basketSlice';
 
 const Basket = () => {
-    const userId = useSelector(state => state.user.ids[0]);
+    const userId = useSelector(state => state.persistedReducer.user.ids[0]);
 
     const dispatch = useDispatch();
 
@@ -16,6 +14,8 @@ const Basket = () => {
         dispatch(fetchedBasket(id));
     }, [dispatch, userId])
 
+
+    if (!userId) return <Redirect to={LOGIN_ROUTE} />
 
     return (
         <div>

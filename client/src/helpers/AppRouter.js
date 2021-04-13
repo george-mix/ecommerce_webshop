@@ -7,17 +7,17 @@ import { PrivateAdminRoute } from './PrivateAdminRoute';
 
 
 const AppRouter = () => {
-    const isAuth = useSelector(state => state.user);
+    const { isAdmin } = useSelector(state => state.persistedReducer.admin);
 
     return (
         <Switch>
             {adminRoutes.map(({ path, Component }) =>
                 <Route key={path} path={path} component={Component} exact />
             )}
-            {adminPrivateRoutes.map(({ path, Component }) =>
+            {isAdmin && adminPrivateRoutes.map(({ path, Component }) =>
                 <PrivateAdminRoute key={path} path={path} component={Component} exact />
             )}
-            {isAuth && authRoutes.map(({ path, Component }) =>
+            { authRoutes.map(({ path, Component }) =>
                 <Route key={path} path={path} component={Component} exact />
             )}
             {publicRoutes.map(({ path, Component }) =>

@@ -36,7 +36,12 @@ export const initialState = userAdapter.getInitialState({
 export const userSlice = createSlice({
     name: "user",
     initialState,
-    reducers: {},
+    reducers: {
+        logoutUser(state, action) {
+            state.isAuth = false;
+            userAdapter.removeAll(state)
+        },
+    },
     extraReducers: {
         [loginUser.pending]: (state) => {
             state.isFetching = true;
@@ -74,6 +79,9 @@ export const userSlice = createSlice({
     }
 });
 
+export const {
+    logoutUser
+} = userSlice.actions;
 
 export default userSlice.reducer;
 
