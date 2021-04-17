@@ -75,8 +75,20 @@ class ProductController {
     async updateOne(req, res, next) {
         try {
             const { id } = req.params;
+            const { info } = req.body;
 
             const updatedProduct = await Product.update(req.body, { where: { id: id } });
+
+            let newInfo = JSON.parse(info);
+            newInfo.forEach(i => {
+                try {
+                    const updatetInfo = async () => { await ProductInfo.update(i, { where: { id: i.id } }) };
+                    updatetInfo();
+                } catch (error) {
+                    console.log(error);
+                }
+            });
+
             return res.json(updatedProduct);
 
         } catch (e) {

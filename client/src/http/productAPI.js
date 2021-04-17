@@ -21,9 +21,10 @@ const productAPI = {
         }
     },
 
-    async updateProduct(id, formData) {
+    async updateProduct(test) {
         try {
-            const { data } = await $authhost.post(`/api/product/${id}`, formData);
+            let { id, formData } = test;
+            const data = await $authhost.put(`/api/product/${id}`, formData);
             return data;
         } catch (e) {
             console.log(e);

@@ -12,8 +12,14 @@ export const addedProduct = createAsyncThunk("product/addOne", async (product) =
     return response;
 });
 
-export const updatedProduct = createAsyncThunk("product/updateOne", async ({ id, formData }) => {
-    await productAPI.updateProduct(id, formData);
+export const updatedProduct = createAsyncThunk("product/updateOne", async ({ ...test }) => {
+    await productAPI.updateProduct(test);
+    let test2 = {};
+    for (let [key, value] of test.formData) {
+        test2[key] = value;
+    }
+    let id = test.id;
+    return { id, test2 }
 })
 
 export const deletedProduct = createAsyncThunk("product/deleteOne", async (id) => {
@@ -73,11 +79,11 @@ export const productsSlice = createSlice({
             state.loading = true
         },
         [updatedProduct.fulfilled]: (state, action) => {
-            //console.log(action.payload);
-            // productsAdapter.updateOne(state, {
-            //     id: action.payload.id,
-            //     changes: action.payload
-            // });
+            console.log(action);
+            productsAdapter.updateOne(state, {
+                id: action.payload.id,
+                changes: action.payload
+            });
             state.loading = false;
         },
         [updatedProduct.rejected]: (state, action) => {

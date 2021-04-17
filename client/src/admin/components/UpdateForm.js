@@ -10,31 +10,24 @@ const UpdateForm = ({ product }) => {
     let data = product;
     let id = data.id;
 
-    const [name, setName] = useState({
-        html: ``
-    });
-    const [price, setPrice] = useState({
-        html: 0
-    });
+    const [name, setName] = useState('');
+    const [price, setPrice] = useState('');
     const [brand, setBrand] = useState('');
     const [category, setCategory] = useState('');
     const [info, setInfo] = useState([]);
-    const [file, setFile] = useState(data.img);
-    const [newFile, setNewFile] = useState(null)
-
-    const handleFileChange = (e) => {
-        setNewFile({ file: URL.createObjectURL(e.target.files[0]) });
-        setFile(e.target.files[0])
-    };
+    const [file, setFile] = useState(null);
 
     useEffect(() => {
-        setName({ html: `${data.name}` });
-        setPrice({ html: `${data.price}` });
-        setBrand(data.brandId);
-        setCategory(data.categoryId);
-        setInfo(data.info);
-        setFile(data.img);
+        if (id) {
+            setName(data.name);
+            setPrice(data.price);
+            setBrand(data.brandId);
+            setCategory(data.categoryId);
+            setInfo(data.info);
+            setFile(data.img);
+        }
     }, [data]);
+
 
     const onProductSave = async (event) => {
         event.preventDefault();
@@ -42,14 +35,10 @@ const UpdateForm = ({ product }) => {
         formData.append('brandId', brand);
         formData.append('categoryId', category);
         formData.append('name', name);
-        formData.append('price', `${price}`);
+        formData.append('price', price);
+        formData.append('info', JSON.stringify(info));
 
         await dispatch(updatedProduct({ id, formData }));
-
-        setName('');
-        setPrice(0);
-        setBrand('');
-        setCategory('');
     };
 
     return (
@@ -57,14 +46,15 @@ const UpdateForm = ({ product }) => {
             <div>
                 <label >Name:</label>
                 <input
-                    value={name.html}
-                    onChange={e => setName({ html: e.target.value })} />
+                    value={name}
+                    onChange={e => setName(e.target.value)}
+                />
             </div>
             <div>
                 <label>Price:</label>
                 <input
-                    value={price.html}
-                    onChange={e => setPrice({ html: Number(e.target.value) || 0 })} />
+                    value={price}
+                    onChange={e => setPrice(Number(e.target.value) || 0)} />
             </div>
             <BrandSelector setBrand={setBrand} brand={brand} />
             <CategorySelector setCategory={setCategory} category={category} />
@@ -73,8 +63,7 @@ const UpdateForm = ({ product }) => {
                 width={300}
                 height={300}
                 alt={data.name}
-                src={newFile ? newFile.file : `${process.env.REACT_APP_API_URL}/${file}`} />
-            <input type="file" onChange={handleFileChange} />
+                src={`${process.env.REACT_APP_API_URL}/${file}`} />
             <div>
                 <button onClick={onProductSave}>Save</button>
             </div>
