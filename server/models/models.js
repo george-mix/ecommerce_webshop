@@ -16,11 +16,26 @@ const User = sequelize.define('user', {
 });
 
 const Basket = sequelize.define('basket', {
-    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+        allowNull: false
+    },
 });
 
 const BasketProduct = sequelize.define('basket_product', {
-    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        allowNull: false,
+        primaryKey: true
+    },
+    quantity: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: '1',
+    }
 });
 
 const Product = sequelize.define('product', {
@@ -50,10 +65,11 @@ const CategoryBrand = sequelize.define('category_brand', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
 });
 
+
 User.hasOne(Basket);
 Basket.belongsTo(User)
 
-Basket.hasMany(BasketProduct);
+Basket.hasMany(BasketProduct, { as: 'productlist' });
 BasketProduct.belongsTo(Basket);
 
 Category.hasMany(Product);

@@ -31,4 +31,6 @@ const basketSlice = createSlice({
 
 export default basketSlice.reducer;
 
-export const basketSelector = state => state.basket;
+export const {
+    selectById: selectBasketById
+} = basketAdapter.getSelectors(state => state.persistedReducer.basket);

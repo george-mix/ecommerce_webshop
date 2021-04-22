@@ -26,7 +26,7 @@ const UpdateForm = ({ product }) => {
             setInfo(data.info);
             setFile(data.img);
         }
-    }, [data]);
+    }, [data, id]);
 
 
     const onProductSave = async (event) => {
