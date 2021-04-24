@@ -6,6 +6,16 @@ export const fetchedBasket = createAsyncThunk("basket/fetchOne", async (id) => {
     return response;
 });
 
+export const incrementedBasket = createAsyncThunk("basket/increment", async ({ basketId, productId }) => {
+    const response = await basketAPI.incrementBasketProduct(basketId, productId);
+    return response
+});
+
+export const decrementedBasket = createAsyncThunk("basket/decrement", async ({ basketId, productId }) => {
+    const response = await basketAPI.decrementBasketProduct(basketId, productId);
+    return response
+});
+
 const basketAdapter = createEntityAdapter();
 
 export const initialState = basketAdapter.getInitialState({ loading: false });
@@ -13,7 +23,11 @@ export const initialState = basketAdapter.getInitialState({ loading: false });
 const basketSlice = createSlice({
     name: "basket",
     initialState,
-    reducers: {},
+    reducers: {
+        logoutBasket(state, action) {
+            basketAdapter.removeAll(state)
+        },
+    },
     extraReducers: {
         [fetchedBasket.pending]: (state) => {
             state.loading = true
@@ -25,9 +39,41 @@ const basketSlice = createSlice({
         [fetchedBasket.rejected]: (state, action) => {
             state.loading = false;
             state.error = action.error;
-        }
+        },
+        [incrementedBasket.pending]: (state) => {
+            state.loading = true
+        },
+        [incrementedBasket.fulfilled]: (state, action) => {
+            state.loading = false;
+            basketAdapter.updateOne(state, {
+                id: action.payload.id,
+                changes: action.payload
+            });
+        },
+        [incrementedBasket.rejected]: (state, action) => {
+            state.loading = false;
+            state.error = action.error;
+        },
+        [decrementedBasket.pending]: (state) => {
+            state.loading = true
+        },
+        [decrementedBasket.fulfilled]: (state, action) => {
+            state.loading = false;
+            basketAdapter.updateOne(state, {
+                id: action.payload.id,
+                changes: action.payload
+            });
+        },
+        [decrementedBasket.rejected]: (state, action) => {
+            state.loading = false;
+            state.error = action.error;
+        },
     }
 });
+
+export const {
+    logoutBasket
+} = basketSlice.actions;
 
 export default basketSlice.reducer;
 

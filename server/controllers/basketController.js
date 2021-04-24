@@ -22,18 +22,20 @@ class BasketController {
 
             let existingProduct = await BasketProduct.findOne({ where: { basketId: id, productId: productId } });
 
-            let postProduct;
-
             if (existingProduct) {
                 await existingProduct.increment('quantity', { by: 1 });
-                postProduct = existingProduct;
             }
 
             if (!existingProduct) {
-                postProduct = await BasketProduct.create({ basketId: id, productId: productId });
+                await BasketProduct.create({ basketId: id, productId: productId });
             }
+            let updatedBasket = await Basket.findOne(
+                {
+                    where: { userId: id },
+                    include: [{ model: BasketProduct, as: 'productlist' }]
+                });
 
-            return res.json(postProduct)
+            return res.json(updatedBasket)
         } catch (e) {
             console.log(e);
         }
@@ -52,7 +54,13 @@ class BasketController {
                 await existingProduct.destroy() :
                 await existingProduct.decrement('quantity', { by: 1 });
 
-            return res.json(existingProduct)
+            let updatedBasket = await Basket.findOne(
+                {
+                    where: { userId: id },
+                    include: [{ model: BasketProduct, as: 'productlist' }]
+                });
+
+            return res.json(updatedBasket)
         } catch (e) {
             console.log(e);
         }

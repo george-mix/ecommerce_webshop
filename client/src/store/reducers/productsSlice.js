@@ -79,7 +79,6 @@ export const productsSlice = createSlice({
             state.loading = true
         },
         [updatedProduct.fulfilled]: (state, action) => {
-            console.log(action);
             productsAdapter.updateOne(state, {
                 id: action.payload.id,
                 changes: action.payload

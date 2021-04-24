@@ -6,13 +6,19 @@ const basketAPI = {
         return data;
     },
 
-    async incrementBasketProduct(id, body) {
-        const { data } = await $authhost.post(`/api/basket/plus/${id}`, body);
+    async incrementBasketProduct(basketId, productId) {
+        let body = {
+            productId
+        }
+        const { data } = await $authhost.post(`/api/basket/plus/${basketId}`, body);
         return data;
     },
 
-    async decrementBasketProduct(id, body) {
-        const { data } = await $authhost.post(`/api/basket/minus/${id}`, body);
+    async decrementBasketProduct(basketId, productId) {
+        let body = {
+            productId
+        }
+        const { data } = await $authhost.post(`/api/basket/minus/${basketId}`, body);
         return data;
     }
 };
