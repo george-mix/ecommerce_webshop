@@ -20,6 +20,11 @@ const basketAPI = {
         }
         const { data } = await $authhost.post(`/api/basket/minus/${basketId}`, body);
         return data;
+    },
+
+    async postOrder(id) {
+        const { data } = await $authhost.post(`/api/basket/orders/${id}`);
+        return data;
     }
 };
 

@@ -1,4 +1,4 @@
-const { Basket, BasketProduct } = require('../models/models');
+const { Basket, BasketProduct, Order, OrderItem } = require('../models/models');
 
 class BasketController {
     async getOne(req, res) {
@@ -7,7 +7,11 @@ class BasketController {
             const basket = await Basket.findOne(
                 {
                     where: { userId: id },
-                    include: [{ model: BasketProduct, as: 'productlist' }]
+                    include: [{ model: BasketProduct, as: 'productlist' },
+                    {
+                        model: Order, as: 'orders',
+                        include: [{ model: OrderItem, as: 'orderitems' }]
+                    }]
                 });
             return res.json(basket);
         } catch (e) {
@@ -61,6 +65,37 @@ class BasketController {
                 });
 
             return res.json(updatedBasket)
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    async postOrder(req, res) {
+        try {
+            let { id } = req.params;
+
+            const order = await Order.create({ basketId: id });
+            let basketProducts = await BasketProduct.findAll({ where: { basketId: id } });
+
+            basketProducts.forEach(product => OrderItem.create({
+                quantity: product.quantity,
+                orderId: order.id,
+                productId: product.productId
+            }));
+
+            await BasketProduct.destroy({ where: { basketId: id } });
+
+            const basket = await Basket.findOne(
+                {
+                    where: { userId: id },
+                    include: [{ model: BasketProduct, as: 'productlist' },
+                    {
+                        model: Order, as: 'orders',
+                        include: [{ model: OrderItem, as: 'orderitems' }]
+                    }]
+                });
+
+            return res.json(basket)
         } catch (e) {
             console.log(e);
         }

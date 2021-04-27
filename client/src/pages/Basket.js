@@ -2,17 +2,19 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router';
 import BasketProduct from '../components/BasketProduct';
+import OrderList from '../components/Orders';
 import { LOGIN_ROUTE } from '../helpers/consts';
-import { fetchedBasket, selectBasketById } from '../store/reducers/basketSlice';
+import { fetchedBasket, postedOrder, selectBasketById } from '../store/reducers/basketSlice';
 
 const Basket = () => {
-    const userId = useSelector(state => state.persistedReducer.user.ids[0]);
-
     const dispatch = useDispatch();
 
-    const basketProducts = useSelector((state) => selectBasketById(state, userId));
+    const userId = useSelector(state => state.persistedReducer.user.ids[0]);
+    const basketId = useSelector(state => state.persistedReducer.basket.ids[0]);
 
-    let productList = basketProducts?.productlist;
+    const basket = useSelector((state) => selectBasketById(state, userId));
+
+    let productList = basket?.productlist;
 
     useEffect(() => {
         let id = userId
@@ -27,10 +29,16 @@ const Basket = () => {
         )
     });
 
+    const handleOrder = () => {
+        dispatch(postedOrder(basketId))
+    };
+
     return (
         <div>
             Basket
             {list}
+            <OrderList basket={basket} />
+            <button onClick={handleOrder}>Order</button>
         </div>
     )
 };

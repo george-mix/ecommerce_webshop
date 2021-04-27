@@ -16,6 +16,11 @@ export const decrementedBasket = createAsyncThunk("basket/decrement", async ({ b
     return response
 });
 
+export const postedOrder = createAsyncThunk("basket/postOrder", async (id) => {
+    const response = await basketAPI.postOrder(id);
+    return response
+});
+
 const basketAdapter = createEntityAdapter();
 
 export const initialState = basketAdapter.getInitialState({ loading: false });
@@ -68,6 +73,20 @@ const basketSlice = createSlice({
             state.loading = false;
             state.error = action.error;
         },
+        [postedOrder.pending]: (state) => {
+            state.loading = true
+        },
+        [postedOrder.fulfilled]: (state, action) => {
+            state.loading = false;
+            basketAdapter.updateOne(state, {
+                id: action.payload.id,
+                changes: action.payload
+            });
+        },
+        [postedOrder.rejected]: (state, action) => {
+            state.loading = false;
+            state.error = action.error;
+        }
     }
 });
 
