@@ -36,9 +36,17 @@ const Basket = () => {
     return (
         <div>
             Basket
-            {list}
+            {basket?.totalPrice === 0 ?
+                <div>
+                    Your Basket Is Empty
+                </div> :
+                <div>
+                    {list}
+                    <h3>Total Price: {basket?.totalPrice}</h3>
+                    <button onClick={handleOrder}>Order</button>
+                </div>}
+
             <OrderList basket={basket} />
-            <button onClick={handleOrder}>Order</button>
         </div>
     )
 };

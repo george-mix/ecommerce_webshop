@@ -46,6 +46,10 @@ const Basket = sequelize.define('basket', {
         primaryKey: true,
         allowNull: false
     },
+    totalPrice: {
+        type: DataTypes.INTEGER,
+        defaultValue: '0',
+    }
 });
 
 const BasketProduct = sequelize.define('basket_product', {
@@ -140,6 +144,10 @@ const Order = sequelize.define('order', {
         primaryKey: true,
         autoIncrement: true,
         allowNull: false
+    },
+    totalPrice: {
+        type: DataTypes.INTEGER,
+        defaultValue: '0',
     }
 });
 

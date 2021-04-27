@@ -1,4 +1,4 @@
-const { Basket, BasketProduct, Order, OrderItem } = require('../models/models');
+const { Basket, BasketProduct, Order, OrderItem, Product } = require('../models/models');
 
 class BasketController {
     async getOne(req, res) {
@@ -24,20 +24,25 @@ class BasketController {
             let { id } = req.params;
             let { productId } = req.body;
 
+            let product = await Product.findByPk(productId);
+
             let existingProduct = await BasketProduct.findOne({ where: { basketId: id, productId: productId } });
 
             if (existingProduct) {
                 await existingProduct.increment('quantity', { by: 1 });
-            }
 
+            }
             if (!existingProduct) {
                 await BasketProduct.create({ basketId: id, productId: productId });
             }
+
             let updatedBasket = await Basket.findOne(
                 {
                     where: { userId: id },
                     include: [{ model: BasketProduct, as: 'productlist' }]
                 });
+
+            await updatedBasket.increment('totalPrice', { by: product.price });
 
             return res.json(updatedBasket)
         } catch (e) {
@@ -49,6 +54,8 @@ class BasketController {
         try {
             let { id } = req.params;
             let { productId } = req.body;
+
+            let product = await Product.findByPk(productId);
 
             let existingProduct = await BasketProduct.findOne({ where: { basketId: id, productId: productId } });
 
@@ -64,6 +71,10 @@ class BasketController {
                     include: [{ model: BasketProduct, as: 'productlist' }]
                 });
 
+            if (updatedBasket.totalPrice > 0) {
+                await updatedBasket.decrement('totalPrice', { by: product.price });
+            }
+
             return res.json(updatedBasket)
         } catch (e) {
             console.log(e);
@@ -74,9 +85,11 @@ class BasketController {
         try {
             let { id } = req.params;
 
-            const order = await Order.create({ basketId: id });
-            let basketProducts = await BasketProduct.findAll({ where: { basketId: id } });
+            const basket = await Basket.findOne({ where: { userId: id } });
 
+            const order = await Order.create({ basketId: id, totalPrice: basket.totalPrice });
+
+            let basketProducts = await BasketProduct.findAll({ where: { basketId: id } });
             basketProducts.forEach(product => OrderItem.create({
                 quantity: product.quantity,
                 orderId: order.id,
@@ -84,8 +97,10 @@ class BasketController {
             }));
 
             await BasketProduct.destroy({ where: { basketId: id } });
+            basket.totalPrice = 0;
+            await basket.save();
 
-            const basket = await Basket.findOne(
+            const updatedBasket = await Basket.findOne(
                 {
                     where: { userId: id },
                     include: [{ model: BasketProduct, as: 'productlist' },
@@ -95,7 +110,7 @@ class BasketController {
                     }]
                 });
 
-            return res.json(basket)
+            return res.json(updatedBasket)
         } catch (e) {
             console.log(e);
         }
