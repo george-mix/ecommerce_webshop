@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
-import { BASKET_ROUTE } from '../helpers/consts';
+import { BASKET_ROUTE, REGISTRATION_ROUTE } from '../helpers/consts';
 import { loginUser } from '../store/reducers/userSlice';
 
 const Login = () => {
@@ -22,26 +23,37 @@ const Login = () => {
     };
 
     return (
-        <div>
-            <h2>Login Page</h2>
-            <form>
-                <input
-                    type="email"
-                    name="email"
-                    placeholder="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-                <input
-                    type="password"
-                    name="password"
-                    autoComplete="on"
-                    placeholder="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
+        <div className="auth">
+            <form className="auth__form">
+                <h3 className="auth__form__title">Login</h3>
+                <h4 className="auth__form__text">Login with email</h4>
+                <div className="auth__form__input">
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                </div>
+                <div className="auth__form__input">
+                    <input
+                        type="password"
+                        name="password"
+                        autoComplete="on"
+                        placeholder="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                </div>
+                <div className="auth__form__button">
+                    <button onClick={handleClick}>login</button>
+                </div>
+                <div className="auth__form__link">
+                    <span>Dont't have an account? </span>
+                    <Link to={REGISTRATION_ROUTE}>Sign Up</Link>
+                </div>
             </form>
-            <button onClick={handleClick} >login</button>
         </div>
     )
 }

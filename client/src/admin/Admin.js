@@ -36,26 +36,33 @@ const Admin = () => {
 
 
     return (
-        <div>
-            <h2>Admin Login Page</h2>
-            <form>
-                <input
-                    type="username"
-                    name="name"
-                    placeholder="name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                />
-                <input
-                    type="password"
-                    name="password"
-                    autoComplete="on"
-                    placeholder="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
+        <div className="auth">
+            <form className="auth__form">
+                <h3 className="auth__form__title"> Login</h3>
+                <h4 className="auth__form__text">Login as an Admin</h4>
+                <div className="auth__form__input">
+                    <input
+                        type="username"
+                        name="name"
+                        placeholder="name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                    />
+                </div>
+                <div className="auth__form__input">
+                    <input
+                        type="password"
+                        name="password"
+                        autoComplete="on"
+                        placeholder="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                </div>
+                <div className="auth__form__button">
+                    <button onClick={handleClick} >login</button>
+                </div>
             </form>
-            <button onClick={handleClick} >login</button>
         </div>
     )
 }
