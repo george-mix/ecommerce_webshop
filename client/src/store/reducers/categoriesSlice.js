@@ -98,5 +98,6 @@ export const {
 export default categoriesSlice.reducer;
 
 export const {
-    selectAll: selectAllCategories
+    selectAll: selectAllCategories,
+    selectById: selectCategoryById
 } = categoriesAdapter.getSelectors(state => state.persistedReducer.categories);

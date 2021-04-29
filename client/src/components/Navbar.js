@@ -37,7 +37,7 @@ const Navbar = () => {
     }, [basketProducts]);
 
     return (
-        <header className="header">
+        <header className="header container">
             <div className="header__grid">
                 <div className="header__grid__item__logo">
                     <Link className="navbar" to={SHOP_ROUTE}>

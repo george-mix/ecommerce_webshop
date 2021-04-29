@@ -98,5 +98,6 @@ export const {
 export default brandSlice.reducer;
 
 export const {
-    selectAll: selectAllBrands
+    selectAll: selectAllBrands,
+    selectById: selectBrandById
 } = brandsAdapter.getSelectors(state => state.persistedReducer.brands);
