@@ -1,20 +1,46 @@
 .header {
     position: relative;
     background-color: $clr-light-grey;
+    height: 10vh;
+    padding: 0 1.6rem;
+    
+    &__grid {
+        display: grid;
+        height: 100%;
+        grid-template-columns: 5fr 1fr 1fr;
 
-    &__navbar {
-        height: 10vh;
-        margin: 0 0.8rem;
+        &__item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
-        &__logo {
-        font-family: 'New Tegomin', serif;
+            &__logo {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+            }
+        }
+    }   
+}
+
+.navbar {
+        & button {
+            background-color: $clr-dark;
+            color: $clr-white;
+            font-size: 1.6rem;
+            padding: 0.1rem 0.3rem;
+            border-radius: 2rem;
+            white-space: nowrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        & h3 {
+            font-size: 2.3rem;
+        }
+
+        & i {
+            font-size: 2.3rem;
+            color: $clr-dark;
         }
     }
-
-    &__contain {
-        display: flex;
-        justify-content: space-between;
-        height: 100%;
-        align-items: center;
-    }
-}

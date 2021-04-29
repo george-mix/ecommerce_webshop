@@ -38,20 +38,27 @@ const Navbar = () => {
 
     return (
         <header className="header">
-            <div className="header__navbar">
-                <div className="header__contain">
-                    {!isAuth ?
-                        <Link to={LOGIN_ROUTE}>
-                            <button>Sign In</button>
-                        </Link> :
-                        <button onClick={onLogout}>Log out</button>}
-                    <Link to={SHOP_ROUTE}>
+            <div className="header__grid">
+                <div className="header__grid__item__logo">
+                    <Link className="navbar" to={SHOP_ROUTE}>
                         <h3 className="header__navbar__logo">Kickshow</h3>
                     </Link>
-                    <Link to={BASKET_ROUTE}>
+                </div>
+                <div className="header__grid__item">
+                    <Link className="navbar" to={BASKET_ROUTE}>
                         <i className="fas fa-suitcase">{isAuth ? count : null}</i>
                     </Link>
                 </div>
+                {!isAuth ?
+                    <div className="header__grid__item">
+                        <Link className="navbar" to={LOGIN_ROUTE}
+                        >
+                            <button>Sign In</button>
+                        </Link>
+                    </div> :
+                    <div className="header__grid__item navbar">
+                        <button onClick={onLogout}>Log out</button>
+                    </div>}
             </div>
         </header>
     )
