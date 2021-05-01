@@ -1,11 +1,11 @@
 import React from 'react';
 
 const OrderItem = ({ order }) => {
-    console.log(order.orderitems);
     return (
-        <div>
-            {order.id}
-            <button>Order Details</button>
+        <div className="listitem order">
+            <h3>{order.id}</h3>
+            <h3>${order.totalPrice}</h3>
+            <button>Details</button>
         </div>
     )
 }

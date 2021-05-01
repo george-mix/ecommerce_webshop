@@ -9,9 +9,11 @@ const OrderList = ({ basket }) => {
     })
 
     return (
-        <div>
-            Orders
-            {list}
+        <div className="orders">
+            <h2>My Orders</h2>
+            <div className="orders__list">
+                {list}
+            </div>
         </div>
     )
 }

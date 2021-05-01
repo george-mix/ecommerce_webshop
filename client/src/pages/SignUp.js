@@ -45,7 +45,7 @@ const SignUp = () => {
                     />
                 </div>
 
-                <div className="auth__form__button">
+                <div className="auth__form button">
                     <button onClick={handleClick}>Sign Up</button>
                 </div>
                 <div className="auth__form__link">

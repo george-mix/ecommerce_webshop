@@ -57,7 +57,7 @@ const ProductDetails = () => {
                 alt={product?.name}
                 src={`${process.env.REACT_APP_API_URL}/${product?.img}`}
             />
-            <div className="details__button">
+            <div className="details button">
                 <button
                     onClick={handleAdd}>Add to Basket</button>
             </div>
@@ -76,7 +76,7 @@ const ProductDetails = () => {
                     </div>
                     <div className="listitem">
                         <h4 className="listitem__title">Price</h4>
-                        <h4 className="listitem__description">{product?.price}
+                        <h4 className="listitem__description">${product?.price}
                         </h4></div>
                     <div className="listitem">
                         <h4 className="listitem__title">Category</h4>

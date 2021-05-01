@@ -1,13 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router';
-import BasketProduct from '../components/BasketProduct';
+import BasketList from '../components/BasketList';
 import OrderList from '../components/Orders';
 import { LOGIN_ROUTE } from '../helpers/consts';
-import { fetchedBasket, postedOrder, selectBasketById } from '../store/reducers/basketSlice';
+import { fetchedBasket, selectBasketById } from '../store/reducers/basketSlice';
 
 const Basket = () => {
     const dispatch = useDispatch();
+    const [orders, setOrders] = useState(false);
 
     const userId = useSelector(state => state.persistedReducer.user.ids[0]);
     const basketId = useSelector(state => state.persistedReducer.basket.ids[0]);
@@ -23,30 +24,19 @@ const Basket = () => {
 
     if (!userId || !productList) return <Redirect to={LOGIN_ROUTE} />
 
-    let list = productList.map(product => {
-        return (
-            <BasketProduct key={product.id} product={product} />
-        )
-    });
-
-    const handleOrder = () => {
-        dispatch(postedOrder(basketId))
-    };
-
     return (
-        <div>
-            Basket
-            {basket?.totalPrice === 0 ?
-                <div>
-                    Your Basket Is Empty
-                </div> :
-                <div>
-                    {list}
-                    <h3>Total Price: {basket?.totalPrice}</h3>
-                    <button onClick={handleOrder}>Order</button>
-                </div>}
-
-            <OrderList basket={basket} />
+        <div className="basket container">
+            <div className="basket__header">
+                <button
+                    className={!orders ? "active" : null}
+                    onClick={() => setOrders(false)}>Basket</button>
+                <h2>/</h2>
+                <button
+                    className={orders ? "active" : null}
+                    onClick={() => setOrders(true)}>Orders</button>
+            </div>
+            {!orders ? <BasketList basket={basket} basketId={basketId} productList={productList} /> :
+                <OrderList basket={basket} />}
         </div>
     )
 };

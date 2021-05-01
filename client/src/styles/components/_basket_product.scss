@@ -1,0 +1,65 @@
+.listitem {
+    border: 1px solid $clr-grey;
+    padding: 1rem;
+    margin-bottom: 1rem;
+
+    &__grid {
+        display: grid;
+        grid-template-columns: 10% 60% 30%;
+
+        & img {
+            max-height: 100%;
+            max-width: 100%;
+            width: auto;
+            height: auto;
+            align-self: center;
+            justify-self: center;
+        }
+        &__info {
+            padding-left: 1rem;
+            align-self: center;
+            
+            & h3 {
+                font-size: 1.8rem;
+                font-weight: 500;
+            }
+
+            & h4 {
+                font-size: 1.6rem;
+                font-weight: 400;
+                color: $clr-grey;
+            }
+        }
+        &__controls {
+            display: block;
+            margin: auto;
+
+            & h4{
+                font-size: 1.6rem;
+                font-weight: 500;
+                padding: 1rem;
+                text-align: center;
+            }
+
+            &__buttons {
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+                padding-bottom: 1rem;
+                
+
+                & button {
+                    padding: 0.3rem 0.7rem;
+                    font-size: 2rem;
+                    color: $clr-black;
+                    background-color: transparent;
+                    border: none;
+                }
+            }
+               
+        }
+     }
+}
+
+    
+    

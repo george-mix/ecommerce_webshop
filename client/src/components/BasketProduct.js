@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { decrementedBasket, incrementedBasket } from '../store/reducers/basketSlice';
 import productAPI from '../http/productAPI';
+import { selectBrandById } from '../store/reducers/brandsSlice';
+import { selectCategoryById } from '../store/reducers/categoriesSlice';
 
 const BasketProduct = ({ product }) => {
     const dispatch = useDispatch();
@@ -18,6 +20,8 @@ const BasketProduct = ({ product }) => {
         fetchData()
     }, [productId]);
 
+    const category = useSelector(state => selectCategoryById(state, productData?.categoryId));
+    const brand = useSelector(state => selectBrandById(state, productData?.categoryId));
 
     const handleIncrement = async () => {
         let test = {
@@ -36,11 +40,28 @@ const BasketProduct = ({ product }) => {
     }
 
     return (
-        <div>
-            <h3>{productData?.name}</h3>
-            <button onClick={handleDecrement}>-</button>
-            <h4>{qnt}</h4>
-            <button onClick={handleIncrement}>+</button>
+        <div className="listitem">
+            <div className="listitem__grid">
+                <img
+                    alt={productData?.name}
+                    src={`${process.env.REACT_APP_API_URL}/${productData?.img}`}
+                />
+                <div className="listitem__grid__info">
+                    <h3>{brand?.name} {productData?.name}</h3>
+                    <h4>Category: {category?.name}</h4>
+                </div>
+                <div className="listitem__grid__controls">
+                    <div className="listitem__grid__controls__buttons">
+                        <button onClick={handleDecrement}>-</button>
+                        <h4>{qnt}</h4>
+                        <button onClick={handleIncrement}>+</button>
+                    </div>
+                    <div className="listitem__grid__controls__price">
+                        <h4>${qnt * productData?.price}</h4>
+                    </div>
+                </div>
+
+            </div>
         </div>
     )
 }

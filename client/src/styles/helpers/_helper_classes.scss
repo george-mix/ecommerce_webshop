@@ -1,0 +1,27 @@
+.container {
+    padding: 0 1.6rem;
+}
+
+.button {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    & button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 2rem;
+        min-width: 16rem;
+        height: 6.2rem;
+        background-color: $clr-dark;
+        border-radius: 3rem;
+        font-size: 1.6rem;
+        color: $clr-white;
+        line-height: 1.2;
+        text-transform: uppercase;
+        position: relative;
+        z-index: 1;
+    }
+}
