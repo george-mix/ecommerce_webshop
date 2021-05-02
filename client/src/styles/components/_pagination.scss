@@ -1,0 +1,32 @@
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    cursor: pointer;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    margin: 3rem 0;
+    
+    a {
+        font-size: 1.6rem;
+        padding: 0.5rem 1rem;
+        border-radius: 0.4rem;
+        border: 0.1rem solid $clr-grey;
+        color: $clr-black;
+    }
+
+    &__link {
+      font-weight: bold;  
+    }
+    
+    &__link--active a {
+      color: $clr-white;
+      background: $clr-black;
+      outline: none;
+    }
+    
+    &__link--disabled a {
+      color: $clr-grey;
+      border: 0.1rem solid $clr-grey;
+    }
+  }

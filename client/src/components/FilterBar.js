@@ -1,19 +1,24 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import FilterModal from './modals/FilterModal';
 
 const FilterBar = () => {
     const [isOpen, setIsOpen] = useState(false);
 
+    const count = useSelector(state => state.persistedReducer.products.count);
+
     const handleClick = () => {
         setIsOpen(!isOpen);
-    }
+    };
+
+
     return (
         <div className="filterbar">
-            <div>Brand: <span>All</span></div>
-            <div>Category: <span>All</span></div>
-            <div onClick={handleClick} className="filterbar__right">
+            <div className="filterbar__part">
+                <h4>Products: <span>{count}</span></h4></div>
+            <div onClick={handleClick} className="filterbar__part">
                 <i className="fas fa-filter"></i>
-                <h5>Filter</h5>
+                <h4>Filter</h4>
             </div>
             <FilterModal open={isOpen} onClose={() => setIsOpen(false)} />
 

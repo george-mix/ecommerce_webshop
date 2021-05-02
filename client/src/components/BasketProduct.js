@@ -12,6 +12,7 @@ const BasketProduct = ({ product }) => {
     const basketId = useSelector(state => state.persistedReducer.basket.ids[0]);
     let productId = product.productId;
     let qnt = product.quantity;
+
     useEffect(() => {
         const fetchData = async () => {
             const data = await productAPI.fetchOneProduct(productId);
@@ -40,23 +41,23 @@ const BasketProduct = ({ product }) => {
     }
 
     return (
-        <div className="listitem">
-            <div className="listitem__grid">
+        <div className="basketitem">
+            <div className="basketitem__grid">
                 <img
                     alt={productData?.name}
                     src={`${process.env.REACT_APP_API_URL}/${productData?.img}`}
                 />
-                <div className="listitem__grid__info">
+                <div className="basketitem__grid__info">
                     <h3>{brand?.name} {productData?.name}</h3>
                     <h4>Category: {category?.name}</h4>
                 </div>
-                <div className="listitem__grid__controls">
-                    <div className="listitem__grid__controls__buttons">
+                <div className="basketitem__grid__controls">
+                    <div className="basketitem__grid__controls__buttons">
                         <button onClick={handleDecrement}>-</button>
                         <h4>{qnt}</h4>
                         <button onClick={handleIncrement}>+</button>
                     </div>
-                    <div className="listitem__grid__controls__price">
+                    <div className="basketitem__grid__controls__price">
                         <h4>${qnt * productData?.price}</h4>
                     </div>
                 </div>

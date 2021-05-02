@@ -1,7 +1,8 @@
-.listitem {
+.basketitem {
     border: 1px solid $clr-grey;
     padding: 1rem;
     margin-bottom: 1rem;
+    border-radius: 0.2rem;
 
     &__grid {
         display: grid;

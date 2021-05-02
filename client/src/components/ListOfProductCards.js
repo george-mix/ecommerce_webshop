@@ -32,10 +32,11 @@ const ListOfProductCards = () => {
     });
 
     return (
-        <div>
+        <div className="container">
+            <div className="wrapper">
+                {list}
+            </div>
             <Pagination pageLimit={pageLimit} setPageNumber={setPageNumber} />
-            <h2>Products</h2>
-            {list}
         </div>
     )
 };
