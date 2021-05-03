@@ -6,7 +6,7 @@ const BrandSelector = ({ setBrand, brand }) => {
     const brands = useSelector(selectAllBrands);
 
     return (
-        <div>
+        <div className="modal__main__selector">
             <label>Select Brand</label>
             <select
                 value={brand}

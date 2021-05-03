@@ -24,18 +24,20 @@ const UpdateCategory = ({ id, open, onClose }) => {
     return ReactDom.createPortal(
         <>
             <div className="overlay" onClick={onClose} />
-            <div className="filtermodal">
-                <div>
-                    <h3>New Category Name</h3>
+            <div className="modal">
+                <div className="modal__title" >
+                    <h3>Update Category Name</h3>
                 </div>
-                <div>
-                    <input
-                        name="brand"
-                        value={newCategoryName}
-                        onChange={e => setNewCategoryName(e.target.value)}
-                        placeholder="new brand" />
+                <div className="modal__main">
+                    <div className="modal__main__input">
+                        <input
+                            name="brand"
+                            value={newCategoryName}
+                            onChange={e => setNewCategoryName(e.target.value)}
+                            placeholder="enter new name" />
+                    </div>
                 </div>
-                <div>
+                <div className="modal__buttons">
                     <button onClick={onClose}>Close</button>
                     <button onClick={updateCategory}>Save</button>
                 </div>

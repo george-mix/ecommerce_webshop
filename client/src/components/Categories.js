@@ -11,8 +11,8 @@ const Categories = ({ setCategoryFilter }) => {
     }, [dispatch]);
 
     return (
-        <div>
-            <h2>Categories</h2>
+        <div className="modal__main__selector">
+            <label>Categories</label>
             <select
                 defaultValue="all"
                 onChange={e => setCategoryFilter(e.target.value)}>

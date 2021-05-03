@@ -24,18 +24,20 @@ const UpdateBrand = ({ id, open, onClose }) => {
     return ReactDom.createPortal(
         <>
             <div className="overlay" onClick={onClose} />
-            <div className="filtermodal">
-                <div>
-                    <h3>New Brand Name</h3>
+            <div className="modal">
+                <div className="modal__title">
+                    <h3>Update Brand Name</h3>
                 </div>
-                <div>
-                    <input
-                        name="brand"
-                        value={newBrandName}
-                        onChange={e => setNewBrandName(e.target.value)}
-                        placeholder="new brand" />
+                <div className="modal__main">
+                    <div className="modal__main__input">
+                        <input
+                            name="brand"
+                            value={newBrandName}
+                            onChange={e => setNewBrandName(e.target.value)}
+                            placeholder="enter new name" />
+                    </div>
                 </div>
-                <div>
+                <div className="modal__buttons">
                     <button onClick={onClose}>Close</button>
                     <button onClick={updateBrand}>Save</button>
                 </div>

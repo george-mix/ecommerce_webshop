@@ -6,7 +6,7 @@ const CategorySelector = ({ setCategory, category }) => {
     const categories = useSelector(selectAllCategories);
 
     return (
-        <div>
+        <div className="modal__main__selector">
             <label>Select Category</label>
             <select
                 value={category}

@@ -26,13 +26,20 @@ const FilterModal = ({ open, onClose }) => {
     return ReactDom.createPortal(
         <>
             <div className="overlay" onClick={onClose} />
-            <div className="filtermodal">
-                <i onClick={onClose} className="fas fa-times"></i>
-                <h3>Filters</h3>
-                <CardsPerPage setProductsPerPage={setProductsPerPage} />
-                <Brands setBrandFilter={setBrandFilter} />
-                <Categories setCategoryFilter={setCategoryFilter} />
-                <button onClick={handleClick}>Filter</button>
+            <div className="modal">
+
+                <div className="modal__title">
+                    <h3>Filters</h3>
+                </div>
+                <div className="modal__main">
+                    <CardsPerPage setProductsPerPage={setProductsPerPage} />
+                    <Brands setBrandFilter={setBrandFilter} />
+                    <Categories setCategoryFilter={setCategoryFilter} />
+                </div>
+                <div className="modal__buttons ">
+                    <button><i onClick={onClose} className="fas fa-times">Close</i></button>
+                    <button onClick={handleClick}>Filter</button>
+                </div>
             </div>
         </>,
         document.getElementById('portal')

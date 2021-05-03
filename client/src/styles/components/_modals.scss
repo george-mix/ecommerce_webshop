@@ -1,0 +1,184 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .7);
+    z-index: 1000;
+}
+
+.modal {
+    height: 80vh;
+    width: 100%;
+    border-top-left-radius: 2rem;
+    border-top-right-radius: 2rem;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background-color: $clr-white;
+    z-index: 1000;
+    overflow-y: scroll;
+
+    &__title {
+        padding: 2rem 0;  
+        text-align: center;
+
+        & h3{
+            font-weight: 600;
+            color: $clr-dark;
+            font-size: 2.4rem;
+        }
+    }
+
+    &__main {
+        margin-bottom: 20rem;
+        padding: 0 1.6rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        min-height: 10rem;
+
+        & label {
+            font-size: 2.2rem;
+            color: $clr-dark;
+            padding-left: 1.6rem;
+        }
+
+        &__selector {
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 1.6rem;
+
+            & select {
+                font-size: 2rem;
+                color: $clr-brown;
+                line-height: 1.2;
+                position: relative;
+                display: block;
+                width: 100%;
+                height: 6.2rem;
+                background: $clr-white;
+                border-radius: 3rem;
+                padding: 0 2rem;
+                border: 1px solid $clr-grey;
+                outline: none;  
+            }
+        }
+
+        &__input {
+            width: 100%;
+            background-color: $clr-white;
+            border-radius: 3rem;
+            position: relative;
+            margin-bottom: 1.6rem;
+
+            & input {
+                font-size: 2rem;
+                color: $clr-brown;
+                line-height: 1.2;
+                position: relative;
+                display: block;
+                width: 100%;
+                height: 6.2rem;
+                background: $clr-white;
+                border-radius: 3rem;
+                padding: 0 2rem;
+                border: 1px solid $clr-grey;
+                outline: none;     
+            }
+
+            & textarea {
+                width: 100%;
+                min-height: 10rem;
+                padding: 1rem;
+                font-size: 2rem;
+                resize: none;
+                border: 1px solid $clr-grey;
+                outline: none;
+            }
+
+            &__info {
+                margin: 0 2rem;
+            }
+
+            &__delete {
+                padding: 2rem;
+               display: flex;
+               justify-content: flex-end;
+
+                & button {
+                    padding: 1rem 2rem;
+                    font-size: 1.6rem;
+                    color: $clr-red;
+                    background-color: $clr-light-grey;
+                    border: 1px solid $clr-grey;
+                    outline: none;
+                }
+            }
+        }
+
+        &__file {
+
+            & input {
+                padding-top: 1rem;
+                padding-left: 1.6rem;
+                font-size: 2rem;
+                color: $clr-dark;
+            }
+        }
+
+        &__info {
+            width: 100%;
+            padding-top: 1.6rem;
+
+            &__section {
+                margin-top: 2rem;
+                border: 1px solid $clr-grey;
+                border-radius: 0.2rem;
+            }
+
+            &__button {
+                padding-top: 2rem;
+               display: flex;
+               justify-content: center;
+               align-items: center;
+
+               & button {
+                border-radius: 4rem;
+                background-color: $clr-light-grey;
+                color: $clr-green;
+                font-size: 2rem;
+                padding: 0.8rem 1.6rem;
+                border: 1px solid $clr-grey;
+                }
+            }
+        }
+    }
+        
+
+    &__buttons {
+        z-index: 1010;
+        background-color: $clr-white;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        padding: 3rem;
+        border-top: 1px solid $clr-grey;
+
+        & button {
+            border-radius: 4rem;
+            background-color: $clr-dark;
+            color: $clr-white;
+            font-size: 2rem;
+            padding: 0.8rem 1.6rem;
+        }
+    }
+}

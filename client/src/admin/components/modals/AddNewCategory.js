@@ -22,18 +22,20 @@ const AddNewCategory = ({ show, onHide }) => {
     return ReactDom.createPortal(
         <>
             <div className="overlay" onClick={onHide} />
-            <div className="filtermodal">
-                <div>
-                    <h3>AddNewCategory</h3>
+            <div className="modal">
+                <div className="modal__title">
+                    <h3>Add New Category</h3>
                 </div>
-                <div>
-                    <input
-                        name="brand"
-                        value={newCategory}
-                        onChange={e => setNewCategory(e.target.value)}
-                        placeholder="new category" />
+                <div className="modal__main">
+                    <div className="modal__main__input">
+                        <input
+                            name="brand"
+                            value={newCategory}
+                            onChange={e => setNewCategory(e.target.value)}
+                            placeholder="new category" />
+                    </div>
                 </div>
-                <div>
+                <div className="modal__buttons">
                     <button onClick={onHide}>Close</button>
                     <button onClick={addCategory}>Save</button>
                 </div>

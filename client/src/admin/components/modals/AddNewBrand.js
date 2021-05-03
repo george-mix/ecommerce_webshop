@@ -22,18 +22,20 @@ const AddNewBrand = ({ show, onHide }) => {
     return ReactDom.createPortal(
         <>
             <div className="overlay" onClick={onHide} />
-            <div className="filtermodal">
-                <div>
-                    <h3>AddNewBrand</h3>
+            <div className="modal">
+                <div className="modal__title">
+                    <h3>Add New Brand</h3>
                 </div>
-                <div>
-                    <input
-                        name="brand"
-                        value={newBrand}
-                        onChange={e => setNewBrand(e.target.value)}
-                        placeholder="new brand" />
+                <div className="modal__main">
+                    <div className="modal__main__input">
+                        <input
+                            name="brand"
+                            value={newBrand}
+                            onChange={e => setNewBrand(e.target.value)}
+                            placeholder="new brand" />
+                    </div>
                 </div>
-                <div>
+                <div className="modal__buttons">
                     <button onClick={onHide}>Close</button>
                     <button onClick={addBrand}>Save</button>
                 </div>

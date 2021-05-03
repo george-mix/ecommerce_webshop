@@ -6,8 +6,8 @@ const CardsPerPage = ({ setProductsPerPage }) => {
     };
 
     return (
-        <div>
-            <h3>Cards Per Page</h3>
+        <div className="modal__main__selector">
+            <label>Cards Per Page</label>
             <select defaultValue="10" onChange={handleChange} >
                 <option value="5">5</option>
                 <option value="10">10</option>

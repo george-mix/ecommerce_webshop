@@ -11,8 +11,8 @@ const Brands = ({ setBrandFilter }) => {
     }, [dispatch]);
 
     return (
-        <div>
-            <h2>Brands</h2>
+        <div className="modal__main__selector">
+            <label>Brands</label>
             <select
                 defaultValue="all"
                 onChange={e => setBrandFilter(e.target.value)}>
