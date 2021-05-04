@@ -35,9 +35,13 @@ const SinglePostPage = () => {
     if (!product) return <Redirect to={ADMIN_PANEL_ROUTE} />
 
     return (
-        <div>
-            <button><Link to={ADMIN_PANEL_ROUTE}>Back</Link></button>
-            <button onClick={onDelete}>Delete</button>
+        <div className="update container">
+            <div className="update__buttons">
+                <button><Link to={ADMIN_PANEL_ROUTE}>Back</Link></button>
+                <button
+                    className="red"
+                    onClick={onDelete}>Delete</button>
+            </div>
 
             <UpdateForm product={product} />
         </div>

@@ -22,7 +22,7 @@ const BasketProduct = ({ product }) => {
     }, [productId]);
 
     const category = useSelector(state => selectCategoryById(state, productData?.categoryId));
-    const brand = useSelector(state => selectBrandById(state, productData?.categoryId));
+    const brand = useSelector(state => selectBrandById(state, productData?.brandId));
 
     const handleIncrement = async () => {
         let test = {

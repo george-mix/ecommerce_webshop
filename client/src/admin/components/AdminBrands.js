@@ -21,10 +21,15 @@ const AdminBrands = () => {
     });
 
     return (
-        <section>
-            <h2>Brands</h2>
+        <section className="admin__section">
+            <div className="admin__section__title">
+                <h3>Brands</h3>
+                <div
+                    className="admin__section__title__button">
+                    <button onClick={() => setBrandVisible(true)}>New Brand</button>
+                </div>
+            </div>
             {brandList}
-            <button onClick={() => setBrandVisible(true)}>New Brand</button>
             <AddNewBrand show={brandVisible} onHide={() => setBrandVisible(false)} />
         </section>
     )

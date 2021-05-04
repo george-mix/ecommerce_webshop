@@ -21,10 +21,14 @@ const AdminBrands = () => {
     });
 
     return (
-        <section>
-            <h2>Categories</h2>
+        <section className="admin__section">
+            <div className="admin__section__title">
+                <h3>Categories</h3>
+                <div className="admin__section__title__button">
+                    <button onClick={() => setCategoryVisible(true)}>New Category</button>
+                </div>
+            </div>
             {categoryList}
-            <button onClick={() => setCategoryVisible(true)}>New Category</button>
             <AddNewCategory show={categoryVisible} onHide={() => setCategoryVisible(false)} />
         </section>
     )

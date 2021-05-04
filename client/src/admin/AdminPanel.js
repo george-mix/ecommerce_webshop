@@ -20,9 +20,13 @@ const AdminPanel = () => {
     };
 
     return (
-        <div>
-            <h2>Admin Panel</h2>
-            <button onClick={onLogOut}>Logout</button>
+        <div className="admin container">
+            <header className="admin__header">
+                <h2>Admin Panel</h2>
+                <div className="admin__header__button">
+                    <button onClick={onLogOut}>Logout</button>
+                </div>
+            </header>
             <AdminBrands />
             <AdminCategories />
             <Products />

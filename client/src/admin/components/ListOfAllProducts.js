@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchProducts, selectAllProducts } from '../../store/reducers/productsSlice';
 import AddNewProduct from './modals/AddNewProduct';
-import { ADMIN_SINGLE_PRODUCT_ROUTE } from '../../helpers/consts';
 import Pagination from '../../components/Pagination';
+import Product from './Product';
 
 const ListOfAllProducts = () => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -14,25 +13,29 @@ const ListOfAllProducts = () => {
     const pageLimit = 10;
     const [pageNumber, setPageNumber] = useState(1);
 
-
-
     useEffect(() => {
         const param = { brandId: null, categoryId: null, limit: pageLimit, page: pageNumber };
         dispatch(fetchProducts(param));
 
     }, [dispatch, pageNumber, pageLimit]);
 
+    const list = products.map(product => {
+        return (
+            <Product key={product.id} product={product} />
+        )
+    })
+
 
     return (
         <section>
-            <h2>Products</h2>
-            <button onClick={() => setModalIsOpen(true)}>Add New Product</button>
+            <div className="admin__section__title">
+                <h3>Products</h3>
+                <div className="admin__section__title__button">
+                    <button onClick={() => setModalIsOpen(true)}>Add New Product</button>
+                </div>
+            </div>
             <AddNewProduct show={modalIsOpen} onHide={() => setModalIsOpen(false)} />
-            {products.map(product => {
-                return (
-                    <h4 key={product.id}><Link to={`${ADMIN_SINGLE_PRODUCT_ROUTE}/${product.id}`}>{product.name}</Link></h4>
-                )
-            })}
+            {list}
             <Pagination pageLimit={pageLimit} setPageNumber={setPageNumber} />
         </section>
     )

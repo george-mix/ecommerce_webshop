@@ -8,10 +8,12 @@ const Brand = ({ category }) => {
     const dispatch = useDispatch();
 
     return (
-        <div key={category.id}>
+        <div key={category.id} className="admin__list">
             <h4 >{category.name}</h4>
-            <button onClick={() => dispatch(deleteCategory(category.id))}>x</button>
-            <button onClick={() => setIsModalOpen(true)}>Update</button>
+            <button className="green" onClick={() => setIsModalOpen(true)}>Update</button>
+            <button onClick={() => dispatch(deleteCategory(category.id))}>
+                <i className="fas fa-times red"></i>
+            </button>
             <UpdateCategory id={category.id} open={isModalOpen} onClose={() => setIsModalOpen(false)} />
         </div>
     )

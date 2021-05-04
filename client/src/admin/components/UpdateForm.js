@@ -43,14 +43,14 @@ const UpdateForm = ({ product }) => {
 
     return (
         <div>
-            <div>
+            <div className="modal__main__input">
                 <label >Name:</label>
                 <input
                     value={name}
                     onChange={e => setName(e.target.value)}
                 />
             </div>
-            <div>
+            <div className="modal__main__input">
                 <label>Price:</label>
                 <input
                     value={price}
@@ -59,12 +59,12 @@ const UpdateForm = ({ product }) => {
             <BrandSelector setBrand={setBrand} brand={brand} />
             <CategorySelector setCategory={setCategory} category={category} />
             <Info info={info} setInfo={setInfo} />
-            <img
-                width={300}
-                height={300}
-                alt={data.name}
-                src={`${process.env.REACT_APP_API_URL}/${file}`} />
-            <div>
+            <div className="update__img">
+                <img
+                    alt={data.name}
+                    src={`${process.env.REACT_APP_API_URL}/${file}`} />
+            </div>
+            <div className="button">
                 <button onClick={onProductSave}>Save</button>
             </div>
         </div>
