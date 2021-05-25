@@ -17,7 +17,8 @@ const Admin = () => {
         password: password
     };
 
-    const handleClick = () => {
+    const handleClick = (e) => {
+        e.preventDefault();
         dispatch(loginAdmin(login));
     };
 
@@ -60,7 +61,7 @@ const Admin = () => {
                     />
                 </div>
                 <div className="auth__form button">
-                    <button onClick={handleClick} >login</button>
+                    <button onClick={(e) => handleClick(e)} >login</button>
                 </div>
             </form>
         </div>
