@@ -15,7 +15,7 @@ const ProductDetails = () => {
     const [product, setProduct] = useState();
     const basketId = useSelector(state => state.persistedReducer.basket.ids[0]);
     const category = useSelector(state => selectCategoryById(state, product?.categoryId));
-    const brand = useSelector(state => selectBrandById(state, product?.categoryId));
+    const brand = useSelector(state => selectBrandById(state, product?.brandId));
 
     useEffect(() => {
         const fetchData = async () => {

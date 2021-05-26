@@ -11,7 +11,7 @@ const ProductCard = ({ oneProduct }) => {
     const card = useSelector((state) => selectProductById(state, id));
 
     const category = useSelector(state => selectCategoryById(state, card?.categoryId));
-    const brand = useSelector(state => selectBrandById(state, card?.categoryId));
+    const brand = useSelector(state => selectBrandById(state, card?.brandId));
 
     return (
         <div className="card">

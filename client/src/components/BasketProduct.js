@@ -48,7 +48,7 @@ const BasketProduct = ({ product }) => {
                     src={`${process.env.REACT_APP_API_URL}/${productData?.img}`}
                 />
                 <div className="basketitem__grid__info">
-                    <h3>{brand?.name} {productData?.name}</h3>
+                    <h3>{brand?.name ? brand.name : null} {productData?.name}</h3>
                     <h4>Category: {category?.name}</h4>
                 </div>
                 <div className="basketitem__grid__controls">
