@@ -15,11 +15,11 @@ const ProductCard = ({ oneProduct }) => {
 
     return (
         <div className="card">
-            <img alt={card.name} src={`${process.env.REACT_APP_API_URL}/${card.img}`} />
+            <img alt={card?.name} src={`${process.env.REACT_APP_API_URL}/${card?.img}`} />
             <div className="card__body">
-                <h4 className="card__body__title">{brand.name} {card.name}</h4>
-                <p className="card__body__category">{category.name}</p>
-                <h5 className="card__body__price">{card.price}</h5>
+                <h4 className="card__body__title">{brand?.name} {card?.name}</h4>
+                <p className="card__body__category">{category?.name}</p>
+                <h5 className="card__body__price">{card?.price}</h5>
                 <Link to={`${PRODUCT_ROUTE}/${id}`}>
                     <button className="card__body__btn">Details</button>
                 </Link>
