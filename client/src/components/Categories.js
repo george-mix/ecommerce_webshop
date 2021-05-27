@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchCategories, selectAllCategories } from '../store/reducers/categoriesSlice';
 
-const Categories = ({ setCategoryFilter }) => {
+const Categories = ({ category, setCategoryFilter }) => {
     const categories = useSelector(selectAllCategories);
     const dispatch = useDispatch();
 
@@ -14,7 +14,7 @@ const Categories = ({ setCategoryFilter }) => {
         <div className="modal__main__selector">
             <label>Categories</label>
             <select
-                defaultValue="all"
+                defaultValue={category}
                 onChange={e => setCategoryFilter(e.target.value)}>
                 <option value="all">All</option>
                 {categories.map(category => {

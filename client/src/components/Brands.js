@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchBrands, selectAllBrands } from '../store/reducers/brandsSlice';
 
-const Brands = ({ setBrandFilter }) => {
+const Brands = ({ brand, setBrandFilter }) => {
     const dispatch = useDispatch();
     const brands = useSelector(selectAllBrands);
 
@@ -14,7 +14,7 @@ const Brands = ({ setBrandFilter }) => {
         <div className="modal__main__selector">
             <label>Brands</label>
             <select
-                defaultValue="all"
+                defaultValue={brand}
                 onChange={e => setBrandFilter(e.target.value)}>
                 <option value="all">All</option>
                 {brands.map(brand => {
