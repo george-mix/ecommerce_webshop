@@ -17,9 +17,15 @@ const Login = () => {
         password: password
     };
 
-    const handleClick = () => {
-        dispatch(loginUser(login));
-        history.push(BASKET_ROUTE)
+    const handleClick = async (e) => {
+        e.preventDefault();
+        try { 
+        await dispatch(loginUser(login));
+        history.push(BASKET_ROUTE);
+        }catch (e) {
+           alert("Wrong email or password!")
+        }
+        history.push(BASKET_ROUTE);
     };
 
     return (
@@ -47,7 +53,7 @@ const Login = () => {
                     />
                 </div>
                 <div className="auth__form button">
-                    <button onClick={handleClick}>login</button>
+                    <button onClick={(e) => handleClick(e)}>login</button>
                 </div>
                 <div className="auth__form__link">
                     <span>Dont't have an account? </span>

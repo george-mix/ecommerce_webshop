@@ -26,7 +26,7 @@ const FilterModal = ({ open, onClose }) => {
     useEffect(() => {
         onClose();
         setProductsPerPage(pageLimit);
-    },[pageLimit])
+    },[pageLimit, onClose])
 
     if (!open) return null;
 

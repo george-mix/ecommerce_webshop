@@ -18,6 +18,7 @@ const Navbar = () => {
 
     useEffect(() => {
         setBasketProducts(basket?.productlist)
+        console.log(5);
     }, [basket]);
 
     const onLogout = () => {
@@ -25,7 +26,6 @@ const Navbar = () => {
         dispatch(logoutUser());
         dispatch(logoutBasket());
     };
-
 
     useEffect(() => {
         if (basketProducts) {

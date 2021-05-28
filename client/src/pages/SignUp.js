@@ -15,8 +15,13 @@ const SignUp = () => {
         password: password
     };
 
-    const handleClick = () => {
-        dispatch(registerUser(registration))
+    const handleClick = async (e) => {
+        e.preventDefault()
+        try {
+        await dispatch(registerUser(registration));
+    }catch (e) {
+        alert("Wrong email or password");
+    }
     };
 
 
@@ -46,7 +51,7 @@ const SignUp = () => {
                 </div>
 
                 <div className="auth__form button">
-                    <button onClick={handleClick}>Sign Up</button>
+                    <button onClick={(e) => handleClick(e)}>Sign Up</button>
                 </div>
                 <div className="auth__form__link">
                     <span>Already have an account? </span>

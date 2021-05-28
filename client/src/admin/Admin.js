@@ -17,9 +17,13 @@ const Admin = () => {
         password: password
     };
 
-    const handleClick = (e) => {
+    const handleClick = async (e) => {
         e.preventDefault();
-        dispatch(loginAdmin(login));
+        try {
+            await dispatch(loginAdmin(login));
+        }catch(e){
+            alert("Wrong name or password!");
+        }
     };
 
     useEffect(() => {
@@ -28,13 +32,11 @@ const Admin = () => {
         };
     }, [dispatch]);
 
-
     useEffect(() => {
         if (isSuccess) {
             history.push(ADMIN_PANEL_ROUTE);
         }
     }, [isSuccess, history])
-
 
     return (
         <div className="auth">
