@@ -17,8 +17,7 @@ const Navbar = () => {
     const basket = useSelector(state => selectBasketById(state, basketId));
 
     useEffect(() => {
-        setBasketProducts(basket?.productlist)
-        console.log(5);
+        setBasketProducts(basket?.productlist);
     }, [basket]);
 
     const onLogout = () => {

@@ -1,3 +1,4 @@
+const { _attributes } = require('../db');
 const { Basket, BasketProduct, Order, OrderItem, Product } = require('../models/models');
 
 class BasketController {
@@ -7,6 +8,11 @@ class BasketController {
             const basket = await Basket.findOne(
                 {
                     where: { userId: id },
+                    order: [
+                        [{model: BasketProduct, as: 'productlist'},
+                         'createdAt', 'ASC'], 
+                         [{model: Order, as: 'orders'},
+                         'createdAt', 'DESC'] ],
                     include: [{ model: BasketProduct, as: 'productlist' },
                     {
                         model: Order, as: 'orders',
@@ -36,15 +42,19 @@ class BasketController {
                 await BasketProduct.create({ basketId: id, productId: productId });
             }
 
+            let incrementedBasket = await Basket.findOne(
+                {where: { userId: id }});
+            await incrementedBasket.increment('totalPrice', { by: product.price });
+
             let updatedBasket = await Basket.findOne(
                 {
                     where: { userId: id },
-                    include: [{ model: BasketProduct, as: 'productlist' }]
+                    order: [[{model: BasketProduct, as: 'productlist'},
+                         'createdAt', 'ASC']],
+                    include: [{ model: BasketProduct, as: 'productlist'}]
                 });
 
-            await updatedBasket.increment('totalPrice', { by: product.price });
-
-            return res.json(updatedBasket)
+            return res.json(updatedBasket);
         } catch (e) {
             console.log(e);
         }
@@ -68,6 +78,8 @@ class BasketController {
             let updatedBasket = await Basket.findOne(
                 {
                     where: { userId: id },
+                    order: [[{model: BasketProduct, as: 'productlist'},
+                         'createdAt', 'ASC']],
                     include: [{ model: BasketProduct, as: 'productlist' }]
                 });
 
@@ -103,6 +115,11 @@ class BasketController {
             const updatedBasket = await Basket.findOne(
                 {
                     where: { userId: id },
+                    order: [
+                        [{model: BasketProduct, as: 'productlist'},
+                         'createdAt', 'ASC'], 
+                         [{model: Order, as: 'orders'},
+                         'createdAt', 'DESC'] ],
                     include: [{ model: BasketProduct, as: 'productlist' },
                     {
                         model: Order, as: 'orders',
