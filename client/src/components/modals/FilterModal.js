@@ -21,12 +21,12 @@ const FilterModal = ({ open, onClose }) => {
         dispatch(productsLimited(productsPerPage));
         dispatch(selectedBrand(brandFilter));
         dispatch(selectedCategory(categoryFilter));
+         onClose();
     };
 
     useEffect(() => {
-        onClose();
         setProductsPerPage(pageLimit);
-    },[pageLimit, onClose])
+    },[pageLimit])
 
     if (!open) return null;
 
