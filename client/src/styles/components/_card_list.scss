@@ -3,4 +3,8 @@
     gap: 1rem;
     grid-template-columns: 1fr;
     justify-content: center;
+
+    @include breakpoint(laptop) {
+      grid-template-columns: 1fr 1fr;
+    }
 }

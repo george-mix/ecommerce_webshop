@@ -10,8 +10,8 @@ const OrderList = ({ basket }) => {
 
     return (
         <div className="orders">
+            <div className="orders__list stopper"> 
             <h2>My Orders</h2>
-            <div className="orders__list">
                 {list}
             </div>
         </div>

@@ -32,7 +32,7 @@ const ListOfProductCards = () => {
     });
 
     return (
-        <div className="container">
+        <div className="container stopper">
             <div className="wrapper">
                 {list}
             </div>

@@ -43,6 +43,7 @@ const ProductDetails = () => {
 
     return (
         <div className="details container">
+            <div className="stopper">
             <div className="details__title">
                 <div className="details__title__name">
                     <h3>{brand?.name} {product?.name}</h3>
@@ -88,8 +89,7 @@ const ProductDetails = () => {
                 </div>
 
             </div>
-
-
+        </div>
         </div>
     )
 }

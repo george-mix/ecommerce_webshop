@@ -6,7 +6,6 @@ import AdminBrands from './components/AdminBrands';
 import AdminCategories from './components/AdminCategories';
 import Products from './components/ListOfAllProducts';
 
-
 const AdminPanel = () => {
     const history = useHistory();
     const dispatch = useDispatch();
@@ -20,7 +19,7 @@ const AdminPanel = () => {
     };
 
     return (
-        <div className="admin container">
+        <div className="admin container stopper">
             <header className="admin__header">
                 <h2>Admin Panel</h2>
                 <div className="admin__header__button">

@@ -13,15 +13,16 @@ const FilterBar = () => {
 
 
     return (
+        <div className="container stopper">
         <div className="filterbar">
-            <div className="filterbar__part">
-                <h4>Products: <span>{count}</span></h4></div>
-            <div onClick={handleClick} className="filterbar__part">
-                <i className="fas fa-filter"></i>
-                <h4>Filter</h4>
+                <div className="filterbar__part">
+                    <h4>Products: <span>{count}</span></h4></div>
+                <div onClick={handleClick} className="filterbar__part">
+                    <i className="fas fa-filter"></i>
+                    <h4>Filter</h4>
+                </div>
+                <FilterModal open={isOpen} onClose={() => setIsOpen(false)} />
             </div>
-            <FilterModal open={isOpen} onClose={() => setIsOpen(false)} />
-
         </div>
     )
 };

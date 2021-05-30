@@ -1,5 +1,4 @@
 .admin {
-
     & h2 {
         font-size: 3rem;
         color: $clr-dark;
@@ -53,8 +52,6 @@
     }
 
     &__section {
-        max-height: 50rem;
-        overflow-y: scroll;
         border-bottom: 1px solid $clr-light-grey;
         padding-bottom: 1rem;
         margin-bottom: 1rem;
@@ -96,5 +93,10 @@
             width: 100%;
             object-fit: cover;
         }
+    }
+
+    &__scroll {
+        max-height: 50rem;
+        overflow-y: scroll;
     }
 }

@@ -28,7 +28,9 @@ const AdminBrands = () => {
                     <button onClick={() => setCategoryVisible(true)}>New Category</button>
                 </div>
             </div>
-            {categoryList}
+                <div className="admin__scroll">
+                    {categoryList}
+                </div>
             <AddNewCategory show={categoryVisible} onHide={() => setCategoryVisible(false)} />
         </section>
     )

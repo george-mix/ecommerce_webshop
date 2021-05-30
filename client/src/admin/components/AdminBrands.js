@@ -29,7 +29,9 @@ const AdminBrands = () => {
                     <button onClick={() => setBrandVisible(true)}>New Brand</button>
                 </div>
             </div>
-            {brandList}
+                <div className="admin__scroll">
+                    {brandList}
+                </div>
             <AddNewBrand show={brandVisible} onHide={() => setBrandVisible(false)} />
         </section>
     )

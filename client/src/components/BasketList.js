@@ -28,7 +28,7 @@ const BasketList = ({ basket, basketId, productList }) => {
                         <button><Link to={SHOP_ROUTE}>Shop</Link></button>
                     </div>
                 </div> :
-                <div className="basketlist__full">
+                <div className="basketlist__full stopper">
                     <div className="basketlist__full__layout">
                         <div className="basketlist__full__layout__top">
                             {list}
