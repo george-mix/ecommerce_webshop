@@ -15,7 +15,7 @@ const Product = ({ product }) => {
             <div>
                 <Link to={`${ADMIN_SINGLE_PRODUCT_ROUTE}/${product.id}`}><button className="green" >Update</button></Link>
             </div>
-            <div>
+            <div className="admin__image">
                 <img
                     alt={product?.name}
                     src={`${process.env.REACT_APP_API_URL}/${product?.img}`}

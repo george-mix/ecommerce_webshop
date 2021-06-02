@@ -54,10 +54,12 @@ const ProductDetails = () => {
                     <h4>Category: <span>{category?.name}</span></h4>
                 </div>
             </div>
-            <img
-                alt={product?.name}
-                src={`${process.env.REACT_APP_API_URL}/${product?.img}`}
-            />
+                <div className="details__image">
+                    <img
+                        alt={product?.name}
+                        src={`${process.env.REACT_APP_API_URL}/${product?.img}`}
+                    />
+                </div>
             <div className="details button">
                 <button
                     onClick={handleAdd}>Add to Basket</button>

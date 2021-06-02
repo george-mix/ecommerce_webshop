@@ -5,19 +5,21 @@
     display: grid;
     grid-template-columns: 50% 50%;
 
-    @include breakpoint(laptop) {
-      
-    }
+    &__img {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      justify-content: center;
+      align-items: center;
 
-    & img {
+      & img {
         width: 100%;
-        height: 100%;
-        object-fit: cover;
-
-        @include breakpoint(laptop) {
-        
-        }
+        height: 40vw;
+        max-height: 15rem;
+        padding: 1rem;
+        object-fit: contain;
       }
+    }
 
       &__body {
         margin: 1rem;
