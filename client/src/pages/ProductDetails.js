@@ -6,6 +6,7 @@ import { LOGIN_ROUTE } from '../helpers/consts';
 import { selectCategoryById } from '../store/reducers/categoriesSlice';
 import { selectBrandById } from '../store/reducers/brandsSlice';
 import productAPI from '../http/productAPI';
+import { Helmet } from 'react-helmet';
 
 const ProductDetails = () => {
     const dispatch = useDispatch();
@@ -42,57 +43,58 @@ const ProductDetails = () => {
         </div>)
 
     return (
-        <div className="details container">
-            <div className="stopper">
-            <div className="details__title">
-                <div className="details__title__name">
-                    <h3>{brand?.name} {product?.name}</h3>
-                    <h4>${product?.price}</h4>
+        <>
+            <Helmet title={`${brand?.name} ${product?.name}`}/>
+            <div className="details container">
+                <div className="stopper">
+                <div className="details__title">
+                    <div className="details__title__name">
+                        <h3>{brand?.name} {product?.name}</h3>
+                        <h4>${product?.price}</h4>
+                    </div>
+                    <div className="details__title__info">
+                        <h4>Brand: <span>{brand?.name}</span></h4>
+                        <h4>Category: <span>{category?.name}</span></h4>
+                    </div>
                 </div>
-                <div className="details__title__info">
-                    <h4>Brand: <span>{brand?.name}</span></h4>
-                    <h4>Category: <span>{category?.name}</span></h4>
+                    <div className="details__image">
+                        <img
+                            alt={product?.name}
+                            src={`${process.env.REACT_APP_API_URL}/${product?.img}`}
+                        />
+                    </div>
+                <div className="details button">
+                    <button
+                        onClick={handleAdd}>Add to Basket</button>
+                </div>
+                <div className="details__description">
+                    <h2>Description</h2>
+                    <div className="details__description__list">
+                        <div className="listitem">
+                            <h4 className="listitem__title">Brand</h4>
+                            <h4 className="listitem__description">{brand?.name}
+                            </h4>
+                        </div>
+                        <div className="listitem">
+                            <h4 className="listitem__title">Name</h4>
+                            <h4 className="listitem__description">{product?.name}
+                            </h4>
+                        </div>
+                        <div className="listitem">
+                            <h4 className="listitem__title">Price</h4>
+                            <h4 className="listitem__description">${product?.price}
+                            </h4></div>
+                        <div className="listitem">
+                            <h4 className="listitem__title">Category</h4>
+                            <h4 className="listitem__description">{category?.name}
+                            </h4>
+                        </div>
+                            {info}
+                        </div>
+                 </div>
                 </div>
             </div>
-                <div className="details__image">
-                    <img
-                        alt={product?.name}
-                        src={`${process.env.REACT_APP_API_URL}/${product?.img}`}
-                    />
-                </div>
-            <div className="details button">
-                <button
-                    onClick={handleAdd}>Add to Basket</button>
-            </div>
-            <div className="details__description">
-                <h2>Description</h2>
-                <div className="details__description__list">
-                    <div className="listitem">
-                        <h4 className="listitem__title">Brand</h4>
-                        <h4 className="listitem__description">{brand?.name}
-                        </h4>
-                    </div>
-                    <div className="listitem">
-                        <h4 className="listitem__title">Name</h4>
-                        <h4 className="listitem__description">{product?.name}
-                        </h4>
-                    </div>
-                    <div className="listitem">
-                        <h4 className="listitem__title">Price</h4>
-                        <h4 className="listitem__description">${product?.price}
-                        </h4></div>
-                    <div className="listitem">
-                        <h4 className="listitem__title">Category</h4>
-                        <h4 className="listitem__description">{category?.name}
-                        </h4>
-                    </div>
-
-                    {info}
-                </div>
-
-            </div>
-        </div>
-        </div>
+        </>
     )
 }
 

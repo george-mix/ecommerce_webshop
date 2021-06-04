@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router';
 import BasketList from '../components/BasketList';
@@ -25,19 +26,22 @@ const Basket = () => {
     if (!userId || !productList) return <Redirect to={LOGIN_ROUTE} />
 
     return (
-        <div className="basket container">
-            <div className="basket__header">
-                <button
-                    className={!orders ? "active" : null}
-                    onClick={() => setOrders(false)}>Basket</button>
-                <h2>/</h2>
-                <button
-                    className={orders ? "active" : null}
-                    onClick={() => setOrders(true)}>Orders</button>
+        <>
+            <Helmet title="Basket"/>
+            <div className="basket container">
+                <div className="basket__header">
+                    <button
+                        className={!orders ? "active" : null}
+                        onClick={() => setOrders(false)}>Basket</button>
+                    <h2>/</h2>
+                    <button
+                        className={orders ? "active" : null}
+                        onClick={() => setOrders(true)}>Orders</button>
+                </div>
+                {!orders ? <BasketList basket={basket} basketId={basketId} productList={productList} /> :
+                    <OrderList basket={basket} />}
             </div>
-            {!orders ? <BasketList basket={basket} basketId={basketId} productList={productList} /> :
-                <OrderList basket={basket} />}
-        </div>
+        </>
     )
 };
 

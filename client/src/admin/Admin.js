@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { ADMIN_PANEL_ROUTE } from '../helpers/consts';
@@ -39,34 +40,37 @@ const Admin = () => {
     }, [isSuccess, history])
 
     return (
-        <div className="auth">
-            <form className="auth__form">
-                <h3 className="auth__form__title"> Login</h3>
-                <h4 className="auth__form__text">Login as an Admin</h4>
-                <div className="auth__form__input">
-                    <input
-                        type="username"
-                        name="name"
-                        placeholder="name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                    />
-                </div>
-                <div className="auth__form__input">
-                    <input
-                        type="password"
-                        name="password"
-                        autoComplete="on"
-                        placeholder="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </div>
-                <div className="auth__form button">
-                    <button onClick={(e) => handleClick(e)} >login</button>
-                </div>
-            </form>
-        </div>
+        <>
+            <Helmet title="Admin"/>
+            <div className="auth">
+                <form className="auth__form">
+                    <h3 className="auth__form__title"> Login</h3>
+                    <h4 className="auth__form__text">Login as an Admin</h4>
+                    <div className="auth__form__input">
+                        <input
+                            type="username"
+                            name="name"
+                            placeholder="name"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                    </div>
+                    <div className="auth__form__input">
+                        <input
+                            type="password"
+                            name="password"
+                            autoComplete="on"
+                            placeholder="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </div>
+                    <div className="auth__form button">
+                        <button onClick={(e) => handleClick(e)} >login</button>
+                    </div>
+                </form>
+            </div>
+        </>
     )
 }
 
